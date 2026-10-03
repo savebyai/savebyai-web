@@ -1,0 +1,17 @@
+[
+{"slug":"myntra","name":"Myntra","category":"Fashion","network":"Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"ajio","name":"AJIO","category":"Fashion","network":"Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"nykaa","name":"Nykaa","category":"Beauty","network":"Cuelinks / Admitad","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"samsung-india","name":"Samsung India","category":"Electronics","network":"Cuelinks / Admitad","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"lenovo-india","name":"Lenovo India","category":"Electronics","network":"vCommission / Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"decathlon-india","name":"Decathlon India","category":"Sports","network":"vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"firstcry","name":"FirstCry","category":"Kids","network":"Cuelinks / vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"makemytrip","name":"MakeMyTrip","category":"Travel","network":"vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"cleartrip","name":"Cleartrip","category":"Travel","network":"vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"agoda","name":"Agoda","category":"Travel","network":"Cuelinks / vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"booking","name":"Booking.com","category":"Travel","network":"vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Priority"},
+{"slug":"hp-india","name":"HP India","category":"Electronics","network":"Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Secondary"},
+{"slug":"goibibo","name":"Goibibo","category":"Travel","network":"vCommission","status":"Pending approval","cashback":"Pending verification","badge":"Secondary"},
+{"slug":"tata-cliq","name":"Tata CLiQ","category":"Shopping","network":"Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Secondary"},
+{"slug":"pepperfry","name":"Pepperfry","category":"Home","network":"Cuelinks","status":"Pending approval","cashback":"Pending verification","badge":"Secondary"}
+]
