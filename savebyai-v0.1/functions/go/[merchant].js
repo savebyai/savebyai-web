@@ -1,1 +1,0 @@
-export async function onRequestGet(context){const slug=context.params.merchant;return new Response(JSON.stringify({ok:false,merchant:slug,status:"pending",message:"Affiliate destination not configured yet."}),{status:503,headers:{"content-type":"application/json; charset=utf-8"}})}
