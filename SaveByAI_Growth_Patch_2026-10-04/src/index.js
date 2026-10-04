@@ -1,11 +1,23 @@
 const ALLOWED_EVENTS=new Set(['page_loaded','search_submitted','search_chip','merchant_viewed','calculator_used','guide_clicked','lead_submitted','affiliate_click']);
+
+// Only merchants explicitly enabled here can redirect traffic.
+// Keep pending/unapproved programmes out of this map until approval and a valid affiliate URL exist.
+const AFFILIATE_MERCHANTS=Object.freeze({
+  nilkamal:{
+    network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/0r8jdq3sst5b3c27b0b2c70051888a/'
+  }
+});
+
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}})}
 function text(v,max=500){return typeof v==='string'?v.trim().slice(0,max):''}
 function refHost(request){try{return new URL(request.headers.get('referer')||'').hostname.slice(0,160)}catch{return ''}}
 function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)&&v.length<=254}
+function affiliateUrlWithClickId(baseUrl,clickId){const target=new URL(baseUrl);target.searchParams.set('subid4',clickId);return target.toString()}
+
 export default{async fetch(request,env){const url=new URL(request.url);if(request.method==='OPTIONS'&&url.pathname.startsWith('/api/'))return new Response(null,{status:204,headers:{'access-control-allow-methods':'POST,OPTIONS','access-control-allow-headers':'content-type'}});
 if(url.pathname==='/api/event'&&request.method==='POST'){try{const b=await request.json();const eventName=text(b.event_name,64);if(!ALLOWED_EVENTS.has(eventName))return json({error:'invalid event'},400);const anon=text(b.anon_id,80);const path=text(b.path||url.pathname,200);let props='{}';try{props=JSON.stringify(b.props||{}).slice(0,2000)}catch{}await env.DB.prepare('INSERT INTO events (created_at,event_name,anon_id,path,props_json,country,referrer_host) VALUES (?,?,?,?,?,?,?)').bind(new Date().toISOString(),eventName,anon,path,props,request.cf?.country||'',refHost(request)).run();return json({ok:true})}catch{return json({error:'bad request'},400)}}
 if(url.pathname==='/api/lead'&&request.method==='POST'){try{const b=await request.json();if(text(b.company,100))return json({ok:true});const email=text(b.email,254).toLowerCase();const interest=text(b.interest,240);const source=text(b.source,80)||'website';if(!validEmail(email))return json({error:'Please enter a valid email.'},400);if(b.consent!==true)return json({error:'Consent is required.'},400);const now=new Date().toISOString();await env.DB.prepare(`INSERT INTO leads (email,interest,source,country,created_at,updated_at) VALUES (?,?,?,?,?,?) ON CONFLICT(email) DO UPDATE SET interest=excluded.interest,source=excluded.source,country=excluded.country,updated_at=excluded.updated_at`).bind(email,interest,source,request.cf?.country||'',now,now).run();return json({ok:true})}catch{return json({error:'Could not save your request.'},400)}}
-if(url.pathname==='/go/nilkamal'&&request.method==='GET'){const clickId=crypto.randomUUID();const now=new Date().toISOString();const props=JSON.stringify({merchant:'nilkamal',network:'admitad',click_id:clickId}).slice(0,2000);try{await env.DB.prepare('INSERT INTO events (created_at,event_name,anon_id,path,props_json,country,referrer_host) VALUES (?,?,?,?,?,?,?)').bind(now,'affiliate_click',clickId,url.pathname,props,request.cf?.country||'',refHost(request)).run()}catch(e){console.error('affiliate click log failed',e)}return Response.redirect('https://tjzuh.com/g/0r8jdq3sst5b3c27b0b2c70051888a/',302)}
+if(url.pathname.startsWith('/go/')&&request.method==='GET'){const merchant=text(url.pathname.slice(4).split('/')[0],80).toLowerCase();const config=AFFILIATE_MERCHANTS[merchant];if(!config)return json({error:'Affiliate merchant is not enabled.'},404);const clickId=crypto.randomUUID();const now=new Date().toISOString();const props=JSON.stringify({merchant,network:config.network,click_id:clickId,subid4:clickId}).slice(0,2000);try{await env.DB.prepare('INSERT INTO events (created_at,event_name,anon_id,path,props_json,country,referrer_host) VALUES (?,?,?,?,?,?,?)').bind(now,'affiliate_click',clickId,url.pathname,props,request.cf?.country||'',refHost(request)).run()}catch(e){console.error('affiliate click log failed',e)}return Response.redirect(affiliateUrlWithClickId(config.affiliateUrl,clickId),302)}
 if(url.pathname==='/api/health')return json({ok:true,service:'savebyai'});
 return env.ASSETS.fetch(request)}};
