@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /merchant.html
+Sitemap: https://savebyai.in/sitemap.xml

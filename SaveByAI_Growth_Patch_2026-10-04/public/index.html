@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="mitgo-verification" content="eaf4a017-b001-44a9-8a27-69e098913056" />
+  <title>SaveByAI — Check before you buy</title>
+  <meta name="description" content="Check smarter ways to save before you buy in India. Compare coupons, card offers, gift-card savings and cashback routes without invented rates.">
+  <link rel="canonical" href="https://savebyai.in/">
+  <meta property="og:title" content="SaveByAI — Check before you buy">
+  <meta property="og:description" content="Find smarter ways to save before you buy in India.">
+  <meta property="og:url" content="https://savebyai.in/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"SaveByAI","url":"https://savebyai.in/","description":"India-first consumer savings tool for comparing verified savings routes and effective prices."}
+  </script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">SaveByAI<span>.</span></a>
+  <nav><a href="#search">Search</a><a href="#calculator">Calculator</a><a href="#guides">Guides</a><a href="#early-access">Early access</a></nav>
+  <span class="alpha">EARLY ACCESS</span>
+</header>
+
+<main>
+<section class="hero" id="search">
+  <div class="pill">CHECK BEFORE YOU BUY</div>
+  <h1>Find the better<br>way to buy it.</h1>
+  <p class="lead">Search a store or category. SaveByAI is being built to combine legitimate coupons, card offers, gift-card savings and cashback routes — then help you work out the effective price.</p>
+  <div class="searchbox">
+    <input id="q" placeholder="Try Myntra, electronics, travel, beauty..." autocomplete="off" aria-label="Search merchants and categories">
+    <button id="searchBtn">Check savings</button>
+  </div>
+  <div class="chips"><span>Try:</span><button data-q="Myntra">Myntra</button><button data-q="Electronics">Electronics</button><button data-q="Travel">Travel</button><button data-q="Beauty">Beauty</button></div>
+</section>
+
+<section class="status-strip consumer-strip" aria-label="SaveByAI principles">
+  <div><b>India-first</b><span>Built around Indian buying routes</span></div>
+  <div><b>19 merchants mapped</b><span>Starting focused, not with hundreds</span></div>
+  <div><b>Verified rates only</b><span>No invented cashback claims</span></div>
+  <div><b>Free to test</b><span>No account required for the calculator</span></div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div><span class="kicker">MERCHANT COVERAGE</span><h2>Routes we are preparing.</h2></div>
+    <div class="filters"><select id="categoryFilter"><option value="">All categories</option></select></div>
+  </div>
+  <p class="summary-note">Live partner routes remain disabled until programme terms, tracking and customer-facing savings are verified.</p>
+  <p id="summary" class="summary"></p>
+  <div id="merchantGrid" class="merchant-grid"></div>
+  <div id="empty" class="empty" hidden>No current merchant matches this search. Tell us what you were looking for below.</div>
+</section>
+
+<section id="calculator" class="section calculator-section">
+  <div class="section-head">
+    <div><span class="kicker">SAVINGS CALCULATOR</span><h2>What is the effective price?</h2></div>
+    <p>Enter savings you have genuinely found. SaveByAI combines them into one effective-price view so you can compare buying routes properly.</p>
+  </div>
+  <div class="calculator">
+    <div class="inputs">
+      <label>Listed price ₹<input id="price" inputmode="decimal" placeholder="60000"></label>
+      <label>Coupon saving ₹<input id="coupon" inputmode="decimal" placeholder="2000"></label>
+      <label>Gift-card saving ₹<input id="gift" inputmode="decimal" placeholder="1000"></label>
+      <label>Bank/card offer ₹<input id="bank" inputmode="decimal" placeholder="3000"></label>
+      <label>Eligible cashback/reward ₹<input id="reward" inputmode="decimal" placeholder="1200"></label>
+    </div>
+    <div class="calc-result">
+      <span>Estimated effective price</span>
+      <strong id="effective">₹0</strong>
+      <div><span>Total saving</span><b id="saving">₹0</b></div>
+      <div><span>Saving %</span><b id="savingPct">0%</b></div>
+      <small>Values are entered by you. They are not SaveByAI offer claims, and not every saving route can be combined.</small>
+    </div>
+  </div>
+</section>
+
+<section id="guides" class="section">
+  <div class="section-head"><div><span class="kicker">BUYING GUIDES</span><h2>Learn the savings method.</h2></div><p>Useful before live partner routes arrive — and designed around the same effective-price logic the product will automate later.</p></div>
+  <div class="guide-grid">
+    <a class="guide-card" data-guide="myntra" href="/guides/how-to-save-on-myntra.html"><span>FASHION</span><h3>How to save on Myntra</h3><p>Sale price, coupons, bank offers, gift cards and cashback — without double-counting.</p></a>
+    <a class="guide-card" data-guide="amazon" href="/guides/amazon-savings-india.html"><span>SHOPPING</span><h3>Amazon India savings checklist</h3><p>Compare the real payable price, seller, card offer, exchange and eligible rewards.</p></a>
+    <a class="guide-card" data-guide="travel" href="/guides/makemytrip-savings.html"><span>TRAVEL</span><h3>How to compare travel deals</h3><p>Look past the headline fare and compare convenience fees, coupons and cancellation terms.</p></a>
+    <a class="guide-card" data-guide="laptop" href="/guides/laptop-deals-india.html"><span>TECH</span><h3>Buying a laptop in India</h3><p>Brand store vs marketplace, exchange, card offer, warranty and effective price.</p></a>
+    <a class="guide-card" data-guide="iphone" href="/guides/iphone-deals-india.html"><span>TECH</span><h3>Buying an iPhone in India</h3><p>Compare reseller price, bank offer, trade-in, gift-card route and warranty.</p></a>
+  </div>
+</section>
+
+<section id="trust" class="section">
+  <div class="section-head"><div><span class="kicker">VERIFICATION</span><h2>What must be true before we call a route live.</h2></div></div>
+  <div class="trust-grid">
+    <article><b>01</b><h3>Programme is active</h3><p>The merchant route must be available through an authorised partner programme.</p></article>
+    <article><b>02</b><h3>Customer reward is permitted</h3><p>Affiliate commission does not automatically mean cashback is allowed.</p></article>
+    <article><b>03</b><h3>Rate is current</h3><p>We check category, customer type, expiry and important restrictions.</p></article>
+    <article><b>04</b><h3>Tracking works</h3><p>The route needs working attribution before we depend on it.</p></article>
+  </div>
+</section>
+
+<section id="early-access" class="feedback early-access">
+  <div><span class="kicker light">EARLY ACCESS</span><h2>Tell us what you want to save on.</h2><p>Join the first SaveByAI testers. We will only email you about early access, useful savings routes and major product updates.</p></div>
+  <form id="leadForm" class="lead-form">
+    <label class="sr-only" for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+    <label class="sr-only" for="interest">Merchant or product</label>
+    <input id="interest" name="interest" type="text" placeholder="What are you planning to buy?">
+    <label class="consent"><input id="consent" type="checkbox" required> <span>I agree to receive SaveByAI early-access emails. I can opt out anytime.</span></label>
+    <input class="hp" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button type="submit">Join early access</button>
+    <p id="leadStatus" class="form-status" aria-live="polite"></p>
+  </form>
+</section>
+</main>
+
+<footer>
+  <div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check before you buy.</p></div>
+  <div class="footer-links"><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+</footer>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

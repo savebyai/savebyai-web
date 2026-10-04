@@ -1,1 +1,0 @@
-export async function onRequestGet(context){const merchant=String(context.params.merchant||'').toLowerCase();return new Response(JSON.stringify({ok:false,merchant,state:'pending_verification',message:'This partner route is not live yet.'}),{status:503,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}})}

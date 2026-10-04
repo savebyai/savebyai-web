@@ -1,0 +1,26 @@
+const grid=document.querySelector('#merchantGrid');
+const q=document.querySelector('#q');
+const categoryFilter=document.querySelector('#categoryFilter');
+const summary=document.querySelector('#summary');
+const empty=document.querySelector('#empty');
+let merchants=[];
+
+function anonId(){let id=localStorage.getItem('savebyai_anon_id');if(!id){id=(crypto.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now().toString(36));localStorage.setItem('savebyai_anon_id',id)}return id}
+async function track(name,props={}){const item={name,props,ts:new Date().toISOString()};try{const arr=JSON.parse(localStorage.getItem('savebyai_events')||'[]');arr.push(item);localStorage.setItem('savebyai_events',JSON.stringify(arr.slice(-200)))}catch{}try{await fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({event_name:name,props,anon_id:anonId(),path:location.pathname})})}catch{} }
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function card(m){return `<article class="card"><div class="card-head"><div><div class="category">${esc(m.category.toUpperCase())}</div><h3>${esc(m.name)}</h3></div><span class="tier">${m.tier.includes('Priority')?'PRIORITY':'MAPPED'}</span></div><div class="route-list"><span>Coupons</span><span>Card offers</span><span>Cashback</span><span>Gift cards</span></div><div class="pending">Verification in progress — no unverified rate is being claimed.</div><div class="card-actions"><a class="details" data-merchant="${esc(m.slug)}" href="/merchant.html?m=${encodeURIComponent(m.slug)}">How we verify it</a><a class="disabled">Live route pending</a></div></article>`}
+function render(){const query=q.value.trim().toLowerCase();const cat=categoryFilter.value;const filtered=merchants.filter(m=>{const hay=`${m.name} ${m.category}`.toLowerCase();return(!query||hay.includes(query))&&(!cat||m.category===cat)});grid.innerHTML=filtered.map(card).join('');summary.textContent=`${filtered.length} of ${merchants.length} mapped merchants shown`;empty.hidden=filtered.length!==0;document.querySelectorAll('[data-merchant]').forEach(a=>a.addEventListener('click',()=>track('merchant_viewed',{merchant:a.dataset.merchant}))) }
+fetch('/data/merchants.json').then(r=>r.json()).then(data=>{merchants=data;[...new Set(data.map(m=>m.category))].sort().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;categoryFilter.appendChild(o)});render()});
+document.querySelector('#searchBtn').addEventListener('click',()=>{track('search_submitted',{query:q.value});render();document.querySelector('.section').scrollIntoView({behavior:'smooth'})});
+q.addEventListener('keydown',e=>{if(e.key==='Enter')document.querySelector('#searchBtn').click()});
+q.addEventListener('input',render);categoryFilter.addEventListener('change',render);
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;track('search_chip',{query:b.dataset.q});render();document.querySelector('.section').scrollIntoView({behavior:'smooth'})}));
+document.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',()=>track('guide_clicked',{guide:a.dataset.guide})));
+
+const ids=['price','coupon','gift','bank','reward'];let calcTimer;
+function calc(){const vals=Object.fromEntries(ids.map(id=>[id,Number(document.querySelector('#'+id).value)||0]));const saving=vals.coupon+vals.gift+vals.bank+vals.reward;const effective=Math.max(0,vals.price-saving);document.querySelector('#effective').textContent='₹'+effective.toLocaleString('en-IN');document.querySelector('#saving').textContent='₹'+saving.toLocaleString('en-IN');document.querySelector('#savingPct').textContent=vals.price?((saving/vals.price)*100).toFixed(1)+'%':'0%';clearTimeout(calcTimer);if(vals.price>0)calcTimer=setTimeout(()=>track('calculator_used',{price_band:vals.price<5000?'<5k':vals.price<20000?'5k-20k':vals.price<50000?'20k-50k':vals.price<100000?'50k-100k':'100k+',saving_pct:vals.price?Number(((saving/vals.price)*100).toFixed(1)):0}),900)}
+ids.forEach(id=>document.querySelector('#'+id).addEventListener('input',calc));
+
+const form=document.querySelector('#leadForm');const leadStatus=document.querySelector('#leadStatus');
+form.addEventListener('submit',async e=>{e.preventDefault();leadStatus.textContent='Saving your request…';const email=document.querySelector('#email').value.trim();const interest=document.querySelector('#interest').value.trim();const consent=document.querySelector('#consent').checked;const company=document.querySelector('#company').value;if(company){leadStatus.textContent='Thanks.';return}try{const r=await fetch('/api/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,interest,consent,source:'homepage'})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not save');leadStatus.textContent='You’re on the early-access list. Thank you.';track('lead_submitted',{has_interest:Boolean(interest)});form.reset()}catch(err){leadStatus.textContent='Early-access capture is not connected yet. Please try again shortly.'}});
+track('page_loaded',{path:location.pathname});

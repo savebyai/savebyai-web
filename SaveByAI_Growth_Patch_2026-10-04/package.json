@@ -1,0 +1,13 @@
+{
+  "name": "savebyai-growth-patch",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 execute savebyai-growth --local --file=./schema.sql",
+    "db:remote": "wrangler d1 execute savebyai-growth --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
