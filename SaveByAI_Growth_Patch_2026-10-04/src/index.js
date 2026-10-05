@@ -1,3 +1,4 @@
+import { AFFILIATE_MERCHANTS } from './merchant-config.mjs';
 const ALLOWED_EVENTS=new Set([
   'page_loaded','search_submitted','search_chip','merchant_viewed','calculator_used','guide_clicked','lead_submitted',
   'affiliate_click','cashback_modal_opened','cashback_started','cashback_claim_submitted'
@@ -6,38 +7,7 @@ const ALLOWED_EVENTS=new Set([
 // Cashback is enabled only where the programme explicitly permits cashback traffic.
 // cashbackRateBps is the customer-facing rate (1000 = 10.00%).
 // The user's planned spend is only an estimate; final cashback uses the eligible tracked order value confirmed by the merchant/network.
-const AFFILIATE_MERCHANTS=Object.freeze({
-  nilkamal:{
-    name:'Nilkamal', network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/0r8jdq3sst5b3c27b0b2c70051888a/', live:true,
-    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
-    customerNote:'Tracked partner shopping is live. Customer cashback will only be enabled after cashback traffic permission and a sustainable customer rate are verified.'
-  },
-  bewakoof:{
-    name:'Bewakoof', network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/el5arbwari5b3c27b0b28f3bde6dea/', live:true,
-    cashbackEnabled:true, cashbackLabel:'10% SaveByAI cashback', cashbackRateBps:1000,
-    customerNote:'Estimated cashback is based on your planned spend. Final cashback is based on the eligible tracked order value after Bewakoof confirms a successful delivered sale.'
-  },
-  'kama-ayurveda':{
-    name:'Kama Ayurveda', network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/yqewe0ii4c5b3c27b0b2238bfeb32d/', live:true,
-    cashbackEnabled:true, cashbackLabel:'12% SaveByAI cashback', cashbackRateBps:1200,
-    customerNote:'Estimated cashback is based on your planned spend. Final cashback is based on the eligible tracked order value after Kama Ayurveda confirms the sale.'
-  },
-  digihaat:{
-    name:'DigiHaat', network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/i7u4l9z7j45b3c27b0b2bd39749ffb/', live:true,
-    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
-    customerNote:'Tracked partner shopping is live. Customer cashback remains off until programme rules are verified.'
-  },
-  palmonas:{
-    name:'Palmonas', network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/cozq2t2pxu5b3c27b0b248f53de592/', live:true,
-    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
-    customerNote:'Tracked partner shopping is live. Customer cashback remains off until programme permission and rate are verified.'
-  }
-});
+
 
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}})}
 function text(v,max=500){return typeof v==='string'?v.trim().slice(0,max):''}

@@ -1,0 +1,39 @@
+name: SaveByAI Offer Watcher
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 1 * * *' # 07:00 India Standard Time
+permissions:
+  contents: read
+jobs:
+  verify-offers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check cashback economics
+        run: node tools/cashback_economics.mjs
+      - name: Check known official offers
+        shell: bash
+        run: |
+          set +e
+          python tools/offer_watcher.py --report offer-watch-report.json
+          code=$?
+          echo "watcher_exit=$code" >> "$GITHUB_ENV"
+          exit 0
+      - name: Upload review report
+        uses: actions/upload-artifact@v4
+        with:
+          name: savebyai-offer-watch-report
+          path: offer-watch-report.json
+          retention-days: 14
+      - name: Flag review when an offer changes
+        if: env.watcher_exit != '0'
+        run: |
+          echo "One or more verified offers disappeared or could not be checked. Review the uploaded offer-watch-report artifact before changing the website."
+          exit 1

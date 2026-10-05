@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-10-05T12:00:00Z",
+  "merchants": {
+    "bewakoof": {
+      "name": "Bewakoof",
+      "last_verified": "2026-10-05",
+      "source_label": "Bewakoof official site",
+      "source_url": "https://www.bewakoof.com/clearance-sale",
+      "offers": [
+        {
+          "id": "clearance-70",
+          "type": "Store sale",
+          "title": "Up to 70% off clearance",
+          "detail": "Selected clearance products. Final price varies by item.",
+          "source_url": "https://www.bewakoof.com/clearance-sale",
+          "watch_phrases": ["Upto 70% OFF", "Up to 70% OFF", "Upto 70% off"]
+        },
+        {
+          "id": "free-shipping-399",
+          "type": "Delivery",
+          "title": "Free shipping above ₹399",
+          "detail": "Shown on Bewakoof's current sale pages.",
+          "source_url": "https://www.bewakoof.com/clearance-sale",
+          "watch_phrases": ["FREE SHIPPING on all orders above ₹399", "FREE SHIPPING on all orders above Rs.399"]
+        },
+        {
+          "id": "multibuy",
+          "type": "Multi-buy",
+          "title": "Selected bundle offers",
+          "detail": "Examples currently include Buy 3 get 10% off and fixed-price bundles on selected products.",
+          "source_url": "https://www.bewakoof.com/clearance-sale",
+          "watch_phrases": ["Buy 3 get 10% off", "Buy 3 for 1199", "Buy 2 for 1099"]
+        }
+      ]
+    },
+    "kama-ayurveda": {
+      "name": "Kama Ayurveda",
+      "last_verified": "2026-10-05",
+      "source_label": "Kama Ayurveda official site",
+      "source_url": "https://www.kamaayurveda.in/happy-hydration-category.html",
+      "offers": [
+        {
+          "id": "kama10",
+          "type": "Coupon",
+          "title": "KAMA10 · 10% off first order above ₹1,500",
+          "detail": "For eligible first orders. Apply the code before payment.",
+          "source_url": "https://www.kamaayurveda.in/happy-hydration-category.html",
+          "watch_phrases": ["KAMA10", "10% off on first order above Rs. 1500"]
+        },
+        {
+          "id": "mobikwik-wallet",
+          "type": "Wallet",
+          "title": "Up to ₹750 MobiKwik cashback",
+          "detail": "Eligibility and cashback amount depend on MobiKwik's current terms.",
+          "source_url": "https://www.kamaayurveda.in/happy-hydration-category.html",
+          "watch_phrases": ["Rs.750 cashback", "Mobikwik wallet", "MobiKwik wallet"]
+        },
+        {
+          "id": "mobikwik-upi-200",
+          "type": "UPI",
+          "title": "₹200 cashback on first MobiKwik UPI transaction",
+          "detail": "For eligible first MobiKwik UPI transactions; verify at checkout.",
+          "source_url": "https://www.kamaayurveda.in/happy-hydration-category.html",
+          "watch_phrases": ["Rs 200 cashback on first Mobikwik UPI transaction", "200 cashback on first Mobikwik UPI transaction"]
+        },
+        {
+          "id": "amex-10x",
+          "type": "Card rewards",
+          "title": "10X Amex Membership Rewards on eligible purchases",
+          "detail": "Eligible cards/channels only. Check current American Express RewardXcelerator terms before paying.",
+          "source_url": "https://www.kamaayurveda.in/happy-hydration-category.html",
+          "secondary_source_url": "https://www.americanexpress.com/en-in/benefits/rewards/reward-xcelerator/",
+          "watch_phrases": ["10X Membership Rewards", "American Express"]
+        }
+      ]
+    }
+  }
+}

@@ -12,12 +12,10 @@
       <p class="cashback-fineprint">Estimate only. Final cashback is based on the eligible tracked order value confirmed by Kama Ayurveda. Returns, cancellations and excluded items may not qualify.</p>
     </div>
   </section>
-  <section class="simple-savings">
-    <h2>Other savings to check</h2>
-    <div class="simple-savings-grid"><div><span>COUPON</span><strong>KAMA10 · 10% off first order above ₹1,500</strong></div><div><span>WALLET / UPI</span><strong>Up to ₹750 MobiKwik cashback · eligible users</strong></div><div><span>CARD</span><strong>10X Amex Membership Rewards · eligible cards</strong></div></div>
-    <p class="stack-note">These offers may have separate eligibility and stacking rules. Check what actually applies at checkout rather than adding every headline saving together.</p>
+  <section class="verified-offers-panel" data-verified-offers data-merchant="kama-ayurveda" data-limit="3">
+    <p class="offer-load-note">Loading today's verified savings…</p>
   </section>
   <details class="more-terms"><summary>Offer details, source & cashback terms</summary><div><p>Kama Ayurveda currently advertises KAMA10 on eligible first orders plus MobiKwik and American Express promotions. SaveByAI cashback is separate and is funded from our eligible affiliate commission.</p><p><strong>Last checked:</strong> 5 Oct 2026 · <a href="https://www.kamaayurveda.in/happy-hydration-category.html" target="_blank" rel="noopener">Kama Ayurveda official website</a></p><p>Cashback normally moves through Tracked → Pending → Confirmed → Available after merchant validation. <a href="/terms.html">Full SaveByAI terms</a>.</p></div></details>
 </main>
 <div class="modal-backdrop" id="storeCashbackModal" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="storeModalTitle"><button class="modal-close" id="storeModalClose" aria-label="Close">×</button><div class="modal-icon">₹</div><span class="kicker">ACTIVATE CASHBACK</span><h2 id="storeModalTitle">Where should we track it?</h2><p class="modal-merchant" id="storeModalMerchant"></p><div class="reward-box"><span>Your estimated cashback</span><strong id="storeModalAmount"></strong><small>We use your email to attach this shopping trip to your SaveByAI cashback record.</small></div><form id="storeCashbackForm"><label for="storeCashbackEmail">Email</label><input id="storeCashbackEmail" type="email" autocomplete="email" placeholder="you@example.com" required><button class="btn btn-primary" id="storeActivateBtn" type="submit">Activate cashback & shop</button><p class="microcopy">No password. Cashback becomes available only after the merchant confirms an eligible transaction.</p><p id="storeCashbackStatus" class="form-status" aria-live="polite"></p></form></div></div>
-<script src="/store-cashback.js" type="module"></script></body></html>
+<script src="/store-cashback.js" type="module"></script><script src="/store-offers.js" type="module"></script></body></html>

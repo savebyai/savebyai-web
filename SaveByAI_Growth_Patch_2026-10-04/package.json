@@ -5,7 +5,9 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "db:local": "wrangler d1 execute savebyai-growth --local --file=./schema.sql",
-    "db:remote": "wrangler d1 execute savebyai-growth --remote --file=./schema.sql"
+    "db:remote": "wrangler d1 execute savebyai-growth --remote --file=./schema.sql",
+    "offers:watch": "python tools/offer_watcher.py",
+    "economics:check": "node tools/cashback_economics.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
