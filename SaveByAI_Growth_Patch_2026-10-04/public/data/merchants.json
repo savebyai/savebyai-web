@@ -1,5 +1,18 @@
 [
   {
+    "slug": "nilkamal",
+    "name": "Nilkamal",
+    "category": "Home & Furniture",
+    "tier": "Live - Tracked Partner",
+    "network": "Admitad",
+    "cashbackRule": "Verify before enabling",
+    "approvalDependency": "Approved / tracking tested",
+    "buildStatus": "Live tracked route",
+    "nextVerification": "Confirm cashback traffic permission + customer payout rate",
+    "state": "Affiliate tracking live",
+    "live": true
+  },
+  {
     "slug": "amazon-india",
     "name": "Amazon India",
     "category": "Shopping",
