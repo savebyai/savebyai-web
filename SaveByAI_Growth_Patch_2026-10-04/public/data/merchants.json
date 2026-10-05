@@ -12,7 +12,28 @@
     "state": "Affiliate tracking live",
     "live": true,
     "seoPath": "/stores/bewakoof.html",
-    "offerHeadline": "Tracked partner shopping is live"
+    "offerHeadline": "Up to 70% off clearance + selected multi-buy offers",
+    "verifiedAt": "5 Oct 2026",
+    "verifiedOffers": [
+      {
+        "type": "Store offer",
+        "title": "Up to 70% off clearance",
+        "detail": "Official Bewakoof clearance page currently advertises up to 70% off."
+      },
+      {
+        "type": "Delivery",
+        "title": "Free shipping above ₹399",
+        "detail": "Shown across current Bewakoof sale and product pages."
+      },
+      {
+        "type": "Multi-buy",
+        "title": "Selected products: Buy 3 get 10% off / bundle pricing",
+        "detail": "Eligibility varies by product; check the merchant page before checkout."
+      }
+    ],
+    "paymentOffers": [],
+    "sourceLabel": "Bewakoof official sale pages",
+    "sourceUrl": "https://www.bewakoof.com/clearance-sale"
   },
   {
     "slug": "nilkamal",
@@ -27,7 +48,28 @@
     "state": "Affiliate tracking live",
     "live": true,
     "seoPath": "/stores/nilkamal.html",
-    "offerHeadline": "Up to 60% off sitewide noted in partner programme"
+    "offerHeadline": "Up to 60% off sitewide noted in partner programme",
+    "verifiedAt": "5 Oct 2026",
+    "verifiedOffers": [
+      {
+        "type": "Store offer",
+        "title": "Up to 60% off sitewide",
+        "detail": "Current Admitad partner programme notes “India’s Favourite Furniture Sale: Upto 60% Off Sitewide”."
+      },
+      {
+        "type": "Financing",
+        "title": "Zero / no-cost EMI shown on selected products",
+        "detail": "Selected Nilkamal furniture and mattress pages advertise no-cost or zero-cost EMI."
+      },
+      {
+        "type": "Delivery",
+        "title": "Free home delivery on selected products",
+        "detail": "Availability depends on item and delivery PIN code."
+      }
+    ],
+    "paymentOffers": [],
+    "sourceLabel": "Nilkamal partner programme + official product pages",
+    "sourceUrl": "https://www.nilkamalfurniture.com/"
   },
   {
     "slug": "kama-ayurveda",
@@ -42,7 +84,39 @@
     "state": "Affiliate tracking live",
     "live": true,
     "seoPath": "/stores/kama-ayurveda.html",
-    "offerHeadline": "Tracked partner shopping is live"
+    "offerHeadline": "10% off first order + MobiKwik & Amex payment offers",
+    "verifiedAt": "5 Oct 2026",
+    "verifiedOffers": [
+      {
+        "type": "Coupon",
+        "title": "10% off first order above ₹1,500",
+        "detail": "Use code KAMA10 on eligible first orders."
+      },
+      {
+        "type": "Gift",
+        "title": "Complimentary gifts on qualifying orders",
+        "detail": "Official site currently advertises gift-with-purchase promotions; thresholds can change."
+      }
+    ],
+    "paymentOffers": [
+      {
+        "type": "Wallet",
+        "title": "Up to ₹750 cashback via MobiKwik Wallet",
+        "detail": "Subject to MobiKwik and merchant terms."
+      },
+      {
+        "type": "UPI",
+        "title": "Flat ₹200 cashback on first MobiKwik UPI transaction",
+        "detail": "For eligible first MobiKwik UPI transaction; terms apply."
+      },
+      {
+        "type": "Card",
+        "title": "10X American Express Membership Rewards points",
+        "detail": "For eligible American Express purchases; card and merchant terms apply."
+      }
+    ],
+    "sourceLabel": "Kama Ayurveda official website",
+    "sourceUrl": "https://www.kamaayurveda.in/happy-hydration-category.html"
   },
   {
     "slug": "digihaat",
@@ -57,7 +131,23 @@
     "state": "Affiliate tracking live",
     "live": true,
     "seoPath": "/stores/digihaat.html",
-    "offerHeadline": "Tracked partner shopping is live"
+    "offerHeadline": "Marketplace discounts vary by seller + metro cashback campaign terms",
+    "verifiedAt": "5 Oct 2026",
+    "verifiedOffers": [
+      {
+        "type": "Marketplace",
+        "title": "Seller-level discounts across ONDC listings",
+        "detail": "Current DigiHaat listings show product-specific markdowns; the exact discount varies by seller and item."
+      },
+      {
+        "type": "Campaign",
+        "title": "Metro cashback campaign terms for eligible new users",
+        "detail": "Published terms describe a flat-off coupon equal to 100% of eligible metro ticket value, minimum order ₹99, coupon valid 30 days. Verify campaign availability before purchase."
+      }
+    ],
+    "paymentOffers": [],
+    "sourceLabel": "DigiHaat official website and terms",
+    "sourceUrl": "https://digihaat.in/en/terms-condition"
   },
   {
     "slug": "palmonas",
@@ -72,7 +162,33 @@
     "state": "Affiliate tracking live",
     "live": true,
     "seoPath": "/stores/palmonas.html",
-    "offerHeadline": "Tracked partner shopping is live"
+    "offerHeadline": "Buy 1 Get 1 + sale pricing + PALMONAS Rewards",
+    "verifiedAt": "5 Oct 2026",
+    "verifiedOffers": [
+      {
+        "type": "Coupon",
+        "title": "Buy 1 Get 1 Free",
+        "detail": "Official site currently shows code B1G1."
+      },
+      {
+        "type": "Sale",
+        "title": "Mega sale items starting from flat ₹999",
+        "detail": "Selected jewellery is currently listed at flat promotional price points."
+      },
+      {
+        "type": "Gift",
+        "title": "Free studs worth ₹1,495 on orders above ₹2,499",
+        "detail": "Shown on the current Palmonas sale page; terms apply."
+      },
+      {
+        "type": "Merchant rewards",
+        "title": "PALMONAS Rewards can include order cashback",
+        "detail": "Palmonas policy gives 5% cashback as an example of order rewards. This is Palmonas wallet credit, not SaveByAI cashback."
+      }
+    ],
+    "paymentOffers": [],
+    "sourceLabel": "Palmonas official sale page and rewards policy",
+    "sourceUrl": "https://palmonas.com/collections/exclusive-buy-2-get-3-free"
   },
   {
     "slug": "amazon-india",
