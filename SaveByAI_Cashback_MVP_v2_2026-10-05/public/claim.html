@@ -8,7 +8,9 @@
   <div class="claim-hero"><span class="kicker">CLAIM CASHBACK</span><h1>Missed the email step?<br><span>We’ll try to match your trip.</span></h1><p>If you clicked through SaveByAI before buying, choose a recent shopping trip below. If we cannot find a local trip, you can still submit the merchant and order details for manual review.</p></div>
   <div class="claim-layout">
     <section class="recent-panel"><div class="panel-head"><div><span class="kicker">RECENT TRIPS</span><h2>Your browser history</h2></div><span class="privacy-chip">This device only</span></div><div id="recentTrips" class="recent-trips"></div><p class="microcopy">These recent trip IDs are stored locally in this browser. Clearing browser storage can remove them.</p></section>
-    <section class="claim-form-card"><span class="kicker">SUBMIT A CLAIM</span><h2 id="claimTitle">Tell us about the purchase.</h2><p class="claim-intro" id="claimIntro">A matched tracked click gives us the best chance of linking your purchase.</p>
+    <section class="claim-form-card">
+      <div id="claimSuccess" class="claim-success" hidden role="status" aria-live="polite"></div>
+      <div id="claimFormWrap"><span class="kicker">SUBMIT A CLAIM</span><h2 id="claimTitle">Tell us about the purchase.</h2><p class="claim-intro" id="claimIntro">A matched tracked click gives us the best chance of linking your purchase.</p>
       <form id="claimForm" class="claim-form">
         <input type="hidden" id="claimClickId">
         <label>Email<input id="claimEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
@@ -20,6 +22,7 @@
         <button class="btn btn-primary" type="submit">Submit cashback claim</button>
         <p id="claimStatus" class="form-status" aria-live="polite"></p>
       </form>
+      </div>
     </section>
   </div>
   <div class="claim-rules"><h3>Important</h3><p>A cashback claim does not create affiliate tracking after the fact. The purchase generally needs to have started through a tracked SaveByAI partner link and must meet the merchant’s eligibility rules. Cashback becomes payable only after the advertiser confirms the qualifying transaction and SaveByAI receives/earns the corresponding commission.</p></div>
