@@ -6,6 +6,8 @@ const formWrap=document.querySelector('#claimFormWrap');
 const form=document.querySelector('#claimForm');
 const submitBtn=form.querySelector('button[type="submit"]');
 let trips=[];let merchants=[];
+const tripCountEl=document.querySelector('#tripCount');
+const claimCountEl=document.querySelector('#claimCount');
 
 function anonId(){let id=localStorage.getItem('savebyai_anon_id');if(!id){id=(crypto.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now().toString(36));localStorage.setItem('savebyai_anon_id',id)}return id}
 function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
@@ -26,6 +28,8 @@ function selectTrip(clickId){
 }
 
 function renderTrips(){
+  if(tripCountEl)tripCountEl.textContent=String(trips.length);
+  if(claimCountEl)claimCountEl.textContent=String(trips.filter(t=>t.claimed).length);
   if(!trips.length){recentEl.innerHTML='<div class="no-trips"><b>No recent tracked trips found on this device.</b><span>You can still submit a manual claim using the form.</span></div>';return}
   recentEl.innerHTML=trips.slice(0,8).map(t=>`<button class="trip-card ${t.claimed?'claimed':''}" data-click="${esc(t.click_id)}" ${t.claimed?'disabled':''}><span><b>${esc(t.name||t.merchant)}</b><small>${esc(fmtDate(t.created_at))}</small></span><em>${t.claimed?'Claim submitted ✓':'Use this tracked trip →'}</em></button>`).join('');
   recentEl.querySelectorAll('[data-click]:not([disabled])').forEach(b=>b.addEventListener('click',()=>selectTrip(b.dataset.click)));
@@ -57,7 +61,7 @@ function showSuccess(data,body){
       <span>Status</span><strong>${matched?'Tracked click linked':'Manual review'}</strong>
     </div>
     <div class="success-actions"><a class="btn btn-primary" href="/">Back to SaveByAI</a><button class="btn btn-secondary" id="anotherClaim" type="button">Submit another claim</button></div>`;
-  successEl.querySelector('#anotherClaim')?.addEventListener('click',()=>{successEl.hidden=true;formWrap.hidden=false;form.reset();document.querySelector('#claimClickId').value='';document.querySelector('#selectedTrip').hidden=true;document.querySelector('#claimEmail').value=localStorage.getItem('savebyai_cashback_email')||'';document.querySelector('#claimTitle').textContent='Tell us about the purchase.';document.querySelector('#claimIntro').textContent='A matched tracked click gives us the best chance of linking your purchase.';statusEl.textContent='';formWrap.scrollIntoView({behavior:'smooth',block:'start'})});
+  successEl.querySelector('#anotherClaim')?.addEventListener('click',()=>{successEl.hidden=true;formWrap.hidden=false;form.reset();document.querySelector('#claimClickId').value='';document.querySelector('#selectedTrip').hidden=true;document.querySelector('#claimEmail').value=localStorage.getItem('savebyai_cashback_email')||'';document.querySelector('#claimTitle').textContent='Recover a purchase.';document.querySelector('#claimIntro').textContent='If your purchase started through SaveByAI, we’ll try to match it to a tracked click. A tracked click gives us the best chance of recovering it.';statusEl.textContent='';formWrap.scrollIntoView({behavior:'smooth',block:'start'})});
   successEl.scrollIntoView({behavior:'smooth',block:'center'});
 }
 

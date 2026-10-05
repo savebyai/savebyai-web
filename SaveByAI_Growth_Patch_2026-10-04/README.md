@@ -14,3 +14,10 @@ Purpose: make the existing MVP ready for anonymous cold-user validation while af
 This patch intentionally does NOT enable affiliate redirects or claim live cashback rates.
 
 See `DEPLOY_CHECKLIST.md` before deploying.
+
+## v3 — 5 Oct 2026
+- Cloudflare root-directory-safe package: top-level folder remains `SaveByAI_Growth_Patch_2026-10-04`.
+- Navigation renamed from `Claim cashback` to `My Savings`.
+- Claim page reframed as a lightweight savings area with recent tracked trips and missing-cashback recovery.
+- Added beta Smart Deal Alerts/watchlist capture inspired by the useful distribution pattern seen in Indian deal communities, without turning SaveByAI into a bulk deal-feed clone.
+- No D1 schema migration required for this version.

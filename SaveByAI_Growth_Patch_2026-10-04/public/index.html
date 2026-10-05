@@ -22,11 +22,11 @@
     <a href="#stores">Stores</a>
     <a href="#how-it-works">How it works</a>
     <a href="#calculator">Calculator</a>
-    <a class="nav-claim" href="/claim.html">Claim cashback</a>
+    <a class="nav-claim" href="/claim.html">My Savings</a>
   </nav>
   <button class="mobile-menu" id="mobileMenu" aria-label="Open menu" aria-expanded="false">☰</button>
 </header>
-<div class="mobile-nav" id="mobileNav" hidden><a href="#stores">Stores</a><a href="#how-it-works">How it works</a><a href="#calculator">Calculator</a><a href="/claim.html">Claim cashback</a></div>
+<div class="mobile-nav" id="mobileNav" hidden><a href="#stores">Stores</a><a href="#how-it-works">How it works</a><a href="#calculator">Calculator</a><a href="/claim.html">My Savings</a></div>
 
 <main>
 <section class="hero shell" id="search">
@@ -53,7 +53,7 @@
     <div class="flow-step"><i>2</i><div><b>Activate cashback</b><span>Enter only your email when cashback is available.</span></div></div>
     <div class="flow-line"></div>
     <div class="flow-step"><i>3</i><div><b>Shop normally</b><span>We attach a unique tracking ID before redirecting you.</span></div></div>
-    <a href="/claim.html" class="soft-link">Already shopped? Claim cashback →</a>
+    <a href="/claim.html" class="soft-link">Already shopped? Open My Savings →</a>
   </aside>
 </section>
 
@@ -82,7 +82,7 @@
     <article><div class="step-no">03</div><h3>We match the purchase</h3><p>When the affiliate network reports the sale against that click ID, we can associate it with your cashback record.</p></article>
     <article><div class="step-no">04</div><h3>Claim if something was missed</h3><p>If you shopped anonymously or cashback did not attach, use Claim Cashback and we will try to match your tracked trip.</p></article>
   </div>
-  <div class="claim-banner"><div><span class="kicker">MISSED THE EMAIL STEP?</span><h3>Already made a purchase through SaveByAI?</h3><p>Use your recent tracked shopping trip to submit a cashback claim. A claim does not create tracking retroactively if you never clicked through SaveByAI.</p></div><a class="btn btn-light" href="/claim.html">Claim cashback</a></div>
+  <div class="claim-banner"><div><span class="kicker">YOUR SAVINGS</span><h3>Track recent trips or recover missing cashback.</h3><p>My Savings keeps your recent tracked shopping trips on this device and gives you a clear fallback when a purchase needs to be matched manually.</p></div><a class="btn btn-light" href="/claim.html">Open My Savings</a></div>
 </section>
 
 <section id="calculator" class="section shell calculator-section">
@@ -108,21 +108,21 @@
   </div>
 </section>
 
-<section id="early-access" class="feedback shell">
-  <div><span class="kicker light">EARLY ACCESS</span><h2>Want a store added?</h2><p>Tell us what you plan to buy. This form is for product updates, separate from the transactional email used to track cashback.</p></div>
+<section id="early-access" class="feedback shell deal-alerts">
+  <div><span class="kicker light">SMART DEAL ALERTS · BETA</span><h2>Tell us what you’re waiting to buy.</h2><p>Instead of scrolling through hundreds of random deals, add a product or store to the SaveByAI beta watchlist. We’ll email early users when we add a relevant verified savings route or useful deal alert.</p><div class="alert-examples"><span>iPhone price drop</span><span>AJIO cashback</span><span>Flight deal</span><span>Laptop offer</span></div></div>
   <form id="leadForm" class="lead-form">
     <label class="sr-only" for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
-    <label class="sr-only" for="interest">Merchant or product</label><input id="interest" name="interest" type="text" placeholder="Store or product you want added">
-    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to receive SaveByAI early-access emails. I can opt out anytime.</span></label>
+    <label class="sr-only" for="interest">Product or store to watch</label><input id="interest" name="interest" type="text" placeholder="e.g. iPhone 17, AJIO, Delhi–Goa flight" required>
+    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to receive SaveByAI beta deal/savings alerts. I can opt out anytime.</span></label>
     <input class="hp" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button type="submit">Join early access</button><p id="leadStatus" class="form-status" aria-live="polite"></p>
+    <button type="submit">Watch this item or store</button><p id="leadStatus" class="form-status" aria-live="polite"></p>
   </form>
 </section>
 </main>
 
 <footer class="shell">
   <div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check before you buy.</p></div>
-  <div class="footer-links"><a href="/claim.html">Claim cashback</a><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+  <div class="footer-links"><a href="/claim.html">My Savings</a><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
 </footer>
 
 <div class="modal-backdrop" id="cashbackModal" hidden>
