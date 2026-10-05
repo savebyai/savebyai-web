@@ -1,1 +1,32 @@
 
+name: SaveByAI Offer Watcher
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 1 * * *"
+
+jobs:
+  check-offers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run SaveByAI offer watcher
+        working-directory: SaveByAI_Growth_Patch_2026-10-04
+        run: python tools/offer_watcher.py
+
+      - name: Upload offer watcher report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: savebyai-offer-watch-report
+          path: SaveByAI_Growth_Patch_2026-10-04/offer-watch-report.json
+          if-no-files-found: warn
