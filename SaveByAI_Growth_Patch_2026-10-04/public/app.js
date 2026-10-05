@@ -3,48 +3,210 @@ const q=document.querySelector('#q');
 const categoryFilter=document.querySelector('#categoryFilter');
 const summary=document.querySelector('#summary');
 const empty=document.querySelector('#empty');
-let merchants=[];let cashbackConfig={};let activeMerchant=null;
+let merchants=[];
+let cashbackConfig={};
+let activeMerchant=null;
 
-function anonId(){let id=localStorage.getItem('savebyai_anon_id');if(!id){id=(crypto.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now().toString(36));localStorage.setItem('savebyai_anon_id',id)}return id}
-async function track(name,props={}){const item={name,props,ts:new Date().toISOString()};try{const arr=JSON.parse(localStorage.getItem('savebyai_events')||'[]');arr.push(item);localStorage.setItem('savebyai_events',JSON.stringify(arr.slice(-200)))}catch{}try{await fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({event_name:name,props,anon_id:anonId(),path:location.pathname})})}catch{}}
-function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function maskEmail(email=''){const [a,b]=email.split('@');if(!b)return email;return `${a.slice(0,2)}${a.length>2?'•••':''}@${b}`}
-function mergedMerchant(m){return {...m,...(cashbackConfig[m.slug]||{})}}
+function anonId(){
+  let id=localStorage.getItem('savebyai_anon_id');
+  if(!id){
+    id=(crypto.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now().toString(36));
+    localStorage.setItem('savebyai_anon_id',id);
+  }
+  return id;
+}
 
-function card(raw){const m=mergedMerchant(raw);const live=Boolean(m.live);const cashback=Boolean(m.cashbackEnabled);const priority=String(m.tier||'').includes('Priority');const detailsHref=live?(m.seoPath||`/stores/${encodeURIComponent(m.slug)}.html`):`/merchant.html?m=${encodeURIComponent(m.slug)}`;
-  if(live&&cashback)return `<article class="card live-card"><div class="card-top"><div class="merchant-logo">${esc(m.name.slice(0,1))}</div><span class="live-badge">LIVE</span></div><div class="category">${esc((m.category||'Store').toUpperCase())}</div><h3>${esc(m.name)}</h3><div class="cashback-highlight"><span>Cashback</span><strong>${esc(m.cashbackLabel)}</strong></div><p class="card-note">Activate with just your email, then shop normally.</p><div class="card-actions"><button class="shop-btn" data-shop="${esc(m.slug)}">Activate cashback & shop</button><a class="details-link" data-merchant="${esc(m.slug)}" href="${detailsHref}">Details</a></div></article>`;
-  if(live){const offers=(m.verifiedOffers||[]).slice(0,2);const payment=(m.paymentOffers||[]).slice(0,1);const preview=[...offers,...payment].slice(0,3).map(o=>`<div class="offer-preview-item"><b>✓</b><span>${esc(o.title)}</span></div>`).join('');return `<article class="card live-card"><div class="card-top"><div class="merchant-logo">${esc(m.name.slice(0,1))}</div><span class="track-badge">OFFERS CHECKED</span></div><div class="category">${esc((m.category||'Store').toUpperCase())}</div><h3>${esc(m.name)}</h3><div class="cashback-wait"><span>Best currently verified</span><strong>${esc(m.offerHeadline||'Tracked shopping available')}</strong></div>${preview?`<div class="offer-preview">${preview}</div>`:''}<p class="verified-mini">Last checked: ${esc(m.verifiedAt||'recently')} · SaveByAI cashback: being verified</p><div class="card-actions"><a class="shop-btn secondary-shop" data-merchant="${esc(m.slug)}" href="${detailsHref}">See savings</a><button class="details-link" data-shop="${esc(m.slug)}">Shop tracked</button></div></article>`;}
-  return `<article class="card pending-card"><div class="card-top"><div class="merchant-logo muted-logo">${esc(m.name.slice(0,1))}</div><span class="soon-badge">${priority?'PRIORITY':'MAPPED'}</span></div><div class="category">${esc((m.category||'Store').toUpperCase())}</div><h3>${esc(m.name)}</h3><div class="route-pills"><span>Coupons</span><span>Cashback</span><span>Offers</span></div><p class="card-note">Programme and customer savings are still being verified.</p><div class="card-actions"><a class="details-link full" data-merchant="${esc(m.slug)}" href="${detailsHref}">See verification status</a></div></article>`}
+async function track(name,props={}){
+  const item={name,props,ts:new Date().toISOString()};
+  try{
+    const arr=JSON.parse(localStorage.getItem('savebyai_events')||'[]');
+    arr.push(item);
+    localStorage.setItem('savebyai_events',JSON.stringify(arr.slice(-200)));
+  }catch{}
+  try{
+    await fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({event_name:name,props,anon_id:anonId(),path:location.pathname})});
+  }catch{}
+}
 
-function render(){const query=q.value.trim().toLowerCase();const cat=categoryFilter.value;const filtered=merchants.filter(raw=>{const m=mergedMerchant(raw);const hay=`${m.name} ${m.category}`.toLowerCase();return(!query||hay.includes(query))&&(!cat||m.category===cat)});grid.innerHTML=filtered.map(card).join('');const liveCount=filtered.filter(m=>mergedMerchant(m).live).length;summary.textContent=`${filtered.length} stores shown${liveCount?` · ${liveCount} live tracked route${liveCount===1?'':'s'}`:''}`;empty.hidden=filtered.length!==0;document.querySelectorAll('[data-merchant]').forEach(a=>a.addEventListener('click',()=>track('merchant_viewed',{merchant:a.dataset.merchant})));document.querySelectorAll('[data-shop]').forEach(btn=>btn.addEventListener('click',()=>beginShop(btn.dataset.shop)))}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function mergedMerchant(m){return {...m,...(cashbackConfig[m.slug]||{})};}
+function formatMoney(value){return '₹'+Math.round(Number(value)||0).toLocaleString('en-IN');}
+function ratePct(bps){const n=Number(bps)||0;return `${(n/100).toFixed(n%100?1:0)}%`;}
+function estimateFor(m,spend){return Math.round(((Number(spend)||0)*(Number(m.cashbackRateBps)||0)/10000)*100)/100;}
 
-async function load(){try{const [m,c]=await Promise.all([fetch('/data/merchants.json').then(r=>r.json()),fetch('/api/cashback/config').then(r=>r.json()).catch(()=>({merchants:{}}))]);merchants=m;cashbackConfig=c.merchants||{};[...new Set(m.map(x=>x.category))].sort().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;categoryFilter.appendChild(o)});render()}catch{grid.innerHTML='<div class="empty">Could not load stores. Please refresh.</div>'}}
+function card(raw){
+  const m=mergedMerchant(raw);
+  const live=Boolean(m.live);
+  const cashback=Boolean(m.cashbackEnabled);
+  const priority=String(m.tier||'').includes('Priority');
+  const detailsHref=live?(m.seoPath||`/stores/${encodeURIComponent(m.slug)}.html`):`/merchant.html?m=${encodeURIComponent(m.slug)}`;
+  if(live&&cashback){
+    const exampleSpend=Number(m.cashbackExampleSpend)||2000;
+    const exampleCashback=estimateFor(m,exampleSpend);
+    const secondary=(m.verifiedOffers||[])[0]?.title||'Current store offers available';
+    return `<article class="card live-card cashback-card">
+      <div class="card-top"><div class="merchant-logo">${esc(m.name.slice(0,1))}</div><span class="cashback-live-badge">CASHBACK LIVE</span></div>
+      <div class="category">${esc((m.category||'Store').toUpperCase())}</div>
+      <h3>${esc(m.name)}</h3>
+      <div class="cashback-money"><span>Example cashback</span><strong>${formatMoney(exampleCashback)} back</strong><small>on ${formatMoney(exampleSpend)} spend · ${ratePct(m.cashbackRateBps)}</small></div>
+      <div class="mini-saving">+ ${esc(secondary)}</div>
+      <div class="card-actions"><button class="shop-btn" data-shop="${esc(m.slug)}">Calculate & activate cashback</button><a class="details-link" data-merchant="${esc(m.slug)}" href="${detailsHref}">Details</a></div>
+    </article>`;
+  }
+  if(live){
+    const offers=(m.verifiedOffers||[]).slice(0,2);
+    const payment=(m.paymentOffers||[]).slice(0,1);
+    const preview=[...offers,...payment].slice(0,3).map(o=>`<div class="offer-preview-item"><b>✓</b><span>${esc(o.title)}</span></div>`).join('');
+    return `<article class="card live-card">
+      <div class="card-top"><div class="merchant-logo">${esc(m.name.slice(0,1))}</div><span class="track-badge">OFFERS CHECKED</span></div>
+      <div class="category">${esc((m.category||'Store').toUpperCase())}</div><h3>${esc(m.name)}</h3>
+      <div class="cashback-wait"><span>Best currently verified</span><strong>${esc(m.offerHeadline||'Tracked shopping available')}</strong></div>
+      ${preview?`<div class="offer-preview">${preview}</div>`:''}
+      <p class="verified-mini">Last checked: ${esc(m.verifiedAt||'recently')}</p>
+      <div class="card-actions"><a class="shop-btn secondary-shop" data-merchant="${esc(m.slug)}" href="${detailsHref}">See savings</a><button class="details-link" data-shop="${esc(m.slug)}">Shop tracked</button></div>
+    </article>`;
+  }
+  return `<article class="card pending-card"><div class="card-top"><div class="merchant-logo muted-logo">${esc(m.name.slice(0,1))}</div><span class="soon-badge">${priority?'PRIORITY':'MAPPED'}</span></div><div class="category">${esc((m.category||'Store').toUpperCase())}</div><h3>${esc(m.name)}</h3><div class="route-pills"><span>Coupons</span><span>Cashback</span><span>Offers</span></div><p class="card-note">Programme and customer savings are still being verified.</p><div class="card-actions"><a class="details-link full" data-merchant="${esc(m.slug)}" href="${detailsHref}">See verification status</a></div></article>`;
+}
 
-function openModal(m){activeMerchant=m;document.querySelector('#modalMerchant').textContent=`${m.name} · ${m.category||'Store'}`;document.querySelector('#modalCashback').textContent=m.cashbackLabel||'Cashback available';document.querySelector('#modalNote').textContent=m.customerNote||'Cashback is subject to eligible purchase and merchant confirmation.';const saved=localStorage.getItem('savebyai_cashback_email')||'';document.querySelector('#cashbackEmail').value=saved;document.querySelector('#cashbackStatus').textContent='';document.querySelector('#cashbackModal').hidden=false;document.body.classList.add('modal-open');setTimeout(()=>document.querySelector('#cashbackEmail').focus(),40);track('cashback_modal_opened',{merchant:m.slug,cashback_label:m.cashbackLabel||''})}
-function closeModal(){document.querySelector('#cashbackModal').hidden=true;document.body.classList.remove('modal-open');activeMerchant=null}
+function render(){
+  const query=q.value.trim().toLowerCase();
+  const cat=categoryFilter.value;
+  const filtered=merchants.filter(raw=>{
+    const m=mergedMerchant(raw);
+    const hay=`${m.name} ${m.category}`.toLowerCase();
+    return(!query||hay.includes(query))&&(!cat||m.category===cat);
+  });
+  grid.innerHTML=filtered.map(card).join('');
+  const cashbackCount=filtered.filter(m=>mergedMerchant(m).cashbackEnabled).length;
+  summary.textContent=`${filtered.length} stores shown${cashbackCount?` · ${cashbackCount} with SaveByAI cashback live`:''}`;
+  empty.hidden=filtered.length!==0;
+  document.querySelectorAll('[data-merchant]').forEach(a=>a.addEventListener('click',()=>track('merchant_viewed',{merchant:a.dataset.merchant})));
+  document.querySelectorAll('[data-shop]').forEach(btn=>btn.addEventListener('click',()=>beginShop(btn.dataset.shop)));
+}
 
-function saveRecentClick(m,data,identified){try{const items=JSON.parse(localStorage.getItem('savebyai_recent_clicks')||'[]');items.unshift({click_id:data.click_id,merchant:m.slug,name:m.name,created_at:new Date().toISOString(),cashback_label:data.cashback_label||m.cashbackLabel||'',identified:Boolean(identified)});localStorage.setItem('savebyai_recent_clicks',JSON.stringify(items.slice(0,20)))}catch{}}
+async function load(){
+  try{
+    const [m,c]=await Promise.all([
+      fetch('/data/merchants.json').then(r=>r.json()),
+      fetch('/api/cashback/config').then(r=>r.json()).catch(()=>({merchants:{}}))
+    ]);
+    merchants=m;
+    cashbackConfig=c.merchants||{};
+    [...new Set(m.map(x=>x.category))].sort().forEach(cat=>{
+      const o=document.createElement('option');o.value=cat;o.textContent=cat;categoryFilter.appendChild(o);
+    });
+    render();
+  }catch{
+    grid.innerHTML='<div class="empty">Could not load stores. Please refresh.</div>';
+  }
+}
 
-async function startTrip(m,email=''){const status=document.querySelector('#cashbackStatus');if(status)status.textContent='Activating tracking…';try{const r=await fetch('/api/cashback/start',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({merchant:m.slug,email,anon_id:anonId()})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not start shopping trip');if(email){localStorage.setItem('savebyai_cashback_email',email);if(data.user_id)localStorage.setItem('savebyai_cashback_user_id',data.user_id)}saveRecentClick(m,data,Boolean(email));location.href=data.redirect_url}catch(err){if(status)status.textContent=err.message;else alert(err.message)}}
+function updateModalEstimate(){
+  if(!activeMerchant)return;
+  const spend=Math.max(0,Number(document.querySelector('#cashbackSpend').value)||0);
+  const amount=estimateFor(activeMerchant,spend);
+  document.querySelector('#modalCashback').textContent=formatMoney(amount)+' estimated';
+  document.querySelector('#modalRate').textContent=`${ratePct(activeMerchant.cashbackRateBps)} SaveByAI cashback`;
+  document.querySelector('#activateCashbackBtn').textContent=amount>0?`Activate ${formatMoney(amount)} cashback & shop`:'Activate cashback & shop';
+}
 
-function beginShop(slug){const raw=merchants.find(x=>x.slug===slug);if(!raw)return;const m=mergedMerchant(raw);track('merchant_viewed',{merchant:slug,action:'shop'});if(m.cashbackEnabled)openModal(m);else startTrip(m,'')}
+function openModal(m){
+  activeMerchant=m;
+  document.querySelector('#modalMerchant').textContent=m.name;
+  document.querySelector('#modalNote').textContent='Final cashback is based on the eligible tracked order value confirmed by the merchant. Returns, cancellations and excluded items can reduce or remove cashback.';
+  document.querySelector('#cashbackSpend').value=Number(m.cashbackExampleSpend)||2000;
+  const saved=localStorage.getItem('savebyai_cashback_email')||'';
+  document.querySelector('#cashbackEmail').value=saved;
+  document.querySelector('#cashbackStatus').textContent='';
+  updateModalEstimate();
+  document.querySelector('#cashbackModal').hidden=false;
+  document.body.classList.add('modal-open');
+  setTimeout(()=>document.querySelector('#cashbackSpend').focus(),40);
+  track('cashback_modal_opened',{merchant:m.slug,cashback_rate_bps:m.cashbackRateBps||null});
+}
+function closeModal(){document.querySelector('#cashbackModal').hidden=true;document.body.classList.remove('modal-open');activeMerchant=null;}
+
+function saveRecentClick(m,data,identified,plannedSpend){
+  try{
+    const items=JSON.parse(localStorage.getItem('savebyai_recent_clicks')||'[]');
+    items.unshift({click_id:data.click_id,merchant:m.slug,name:m.name,created_at:new Date().toISOString(),cashback_label:data.cashback_label||m.cashbackLabel||'',cashback_rate_bps:data.cashback_rate_bps||m.cashbackRateBps||null,planned_spend:plannedSpend||0,estimated_cashback:data.estimated_cashback||0,identified:Boolean(identified)});
+    localStorage.setItem('savebyai_recent_clicks',JSON.stringify(items.slice(0,20)));
+  }catch{}
+}
+
+async function startTrip(m,email='',plannedSpend=0){
+  const status=document.querySelector('#cashbackStatus');
+  if(status)status.textContent='Activating cashback…';
+  try{
+    const r=await fetch('/api/cashback/start',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({merchant:m.slug,email,anon_id:anonId(),planned_spend:plannedSpend})});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(data.error||'Could not start shopping trip');
+    if(email){
+      localStorage.setItem('savebyai_cashback_email',email);
+      if(data.user_id)localStorage.setItem('savebyai_cashback_user_id',data.user_id);
+    }
+    saveRecentClick(m,data,Boolean(email),plannedSpend);
+    location.href=data.redirect_url;
+  }catch(err){
+    if(status)status.textContent=err.message;else alert(err.message);
+  }
+}
+
+function beginShop(slug){
+  const raw=merchants.find(x=>x.slug===slug);if(!raw)return;
+  const m=mergedMerchant(raw);
+  track('merchant_viewed',{merchant:slug,action:'shop'});
+  if(m.cashbackEnabled)openModal(m);else startTrip(m,'',0);
+}
 
 load();
-document.querySelector('#searchBtn').addEventListener('click',()=>{track('search_submitted',{query:q.value});render();document.querySelector('#stores').scrollIntoView({behavior:'smooth'})});
-q.addEventListener('keydown',e=>{if(e.key==='Enter')document.querySelector('#searchBtn').click()});q.addEventListener('input',render);categoryFilter.addEventListener('change',render);
-document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;track('search_chip',{query:b.dataset.q});render();document.querySelector('#stores').scrollIntoView({behavior:'smooth'})}));
+document.querySelector('#searchBtn').addEventListener('click',()=>{track('search_submitted',{query:q.value});render();document.querySelector('#stores').scrollIntoView({behavior:'smooth'});});
+q.addEventListener('keydown',e=>{if(e.key==='Enter')document.querySelector('#searchBtn').click();});
+q.addEventListener('input',render);
+categoryFilter.addEventListener('change',render);
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.q;track('search_chip',{query:b.dataset.q});render();document.querySelector('#stores').scrollIntoView({behavior:'smooth'});}));
 document.querySelectorAll('[data-guide]').forEach(a=>a.addEventListener('click',()=>track('guide_clicked',{guide:a.dataset.guide})));
 
 const ids=['price','coupon','gift','bank','reward'];let calcTimer;
-function calc(){const vals=Object.fromEntries(ids.map(id=>[id,Number(document.querySelector('#'+id).value)||0]));const saving=vals.coupon+vals.gift+vals.bank+vals.reward;const effective=Math.max(0,vals.price-saving);document.querySelector('#effective').textContent='₹'+effective.toLocaleString('en-IN');document.querySelector('#saving').textContent='₹'+saving.toLocaleString('en-IN');document.querySelector('#savingPct').textContent=vals.price?((saving/vals.price)*100).toFixed(1)+'%':'0%';clearTimeout(calcTimer);if(vals.price>0)calcTimer=setTimeout(()=>track('calculator_used',{price_band:vals.price<5000?'<5k':vals.price<20000?'5k-20k':vals.price<50000?'20k-50k':vals.price<100000?'50k-100k':'100k+',saving_pct:vals.price?Number(((saving/vals.price)*100).toFixed(1)):0}),900)}
+function calc(){
+  const vals=Object.fromEntries(ids.map(id=>[id,Number(document.querySelector('#'+id).value)||0]));
+  const saving=vals.coupon+vals.gift+vals.bank+vals.reward;
+  const effective=Math.max(0,vals.price-saving);
+  document.querySelector('#effective').textContent='₹'+effective.toLocaleString('en-IN');
+  document.querySelector('#saving').textContent='₹'+saving.toLocaleString('en-IN');
+  document.querySelector('#savingPct').textContent=vals.price?((saving/vals.price)*100).toFixed(1)+'%':'0%';
+  clearTimeout(calcTimer);
+  if(vals.price>0)calcTimer=setTimeout(()=>track('calculator_used',{price_band:vals.price<5000?'<5k':vals.price<20000?'5k-20k':vals.price<50000?'20k-50k':vals.price<100000?'50k-100k':'100k+',saving_pct:vals.price?Number(((saving/vals.price)*100).toFixed(1)):0}),900);
+}
 ids.forEach(id=>document.querySelector('#'+id).addEventListener('input',calc));
 
 const form=document.querySelector('#leadForm');const leadStatus=document.querySelector('#leadStatus');
-form.addEventListener('submit',async e=>{e.preventDefault();leadStatus.textContent='Saving your request…';const email=document.querySelector('#email').value.trim();const interest=document.querySelector('#interest').value.trim();const consent=document.querySelector('#consent').checked;const company=document.querySelector('#company').value;if(company){leadStatus.textContent='Thanks.';return}try{const r=await fetch('/api/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,interest,consent,source:'deal_alert'})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not save');leadStatus.textContent='Added to your SaveByAI beta watchlist. We’ll email when we have something relevant.';track('lead_submitted',{has_interest:Boolean(interest),source:'deal_alert'});form.reset()}catch(err){leadStatus.textContent=err.message||'Please try again shortly.'}});
+form.addEventListener('submit',async e=>{
+  e.preventDefault();leadStatus.textContent='Saving your request…';
+  const email=document.querySelector('#email').value.trim();const interest=document.querySelector('#interest').value.trim();const consent=document.querySelector('#consent').checked;const company=document.querySelector('#company').value;
+  if(company){leadStatus.textContent='Thanks.';return;}
+  try{
+    const r=await fetch('/api/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,interest,consent,source:'deal_alert'})});
+    const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not save');
+    leadStatus.textContent='Added to your SaveByAI beta watchlist. We’ll email when we have something relevant.';track('lead_submitted',{has_interest:Boolean(interest),source:'deal_alert'});form.reset();
+  }catch(err){leadStatus.textContent=err.message||'Please try again shortly.';}
+});
 
-document.querySelector('#cashbackForm').addEventListener('submit',e=>{e.preventDefault();if(!activeMerchant)return;const email=document.querySelector('#cashbackEmail').value.trim().toLowerCase();startTrip(activeMerchant,email)});
-document.querySelector('#continueWithoutCashback').addEventListener('click',()=>{if(activeMerchant)startTrip(activeMerchant,'')});
-document.querySelector('#modalClose').addEventListener('click',closeModal);document.querySelector('#cashbackModal').addEventListener('click',e=>{if(e.target.id==='cashbackModal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('#cashbackModal').hidden)closeModal()});
+document.querySelector('#cashbackSpend').addEventListener('input',updateModalEstimate);
+document.querySelector('#cashbackForm').addEventListener('submit',e=>{
+  e.preventDefault();if(!activeMerchant)return;
+  const email=document.querySelector('#cashbackEmail').value.trim().toLowerCase();
+  const spend=Math.max(0,Number(document.querySelector('#cashbackSpend').value)||0);
+  if(spend<=0){document.querySelector('#cashbackStatus').textContent='Enter your expected spend to estimate cashback.';return;}
+  startTrip(activeMerchant,email,spend);
+});
+document.querySelector('#continueWithoutCashback').addEventListener('click',()=>{if(activeMerchant)startTrip(activeMerchant,'',Number(document.querySelector('#cashbackSpend').value)||0);});
+document.querySelector('#modalClose').addEventListener('click',closeModal);
+document.querySelector('#cashbackModal').addEventListener('click',e=>{if(e.target.id==='cashbackModal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('#cashbackModal').hidden)closeModal();});
 
-const mobileMenu=document.querySelector('#mobileMenu'),mobileNav=document.querySelector('#mobileNav');mobileMenu.addEventListener('click',()=>{const open=mobileNav.hidden;mobileNav.hidden=!open;mobileMenu.setAttribute('aria-expanded',String(open))});mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.hidden=true;mobileMenu.setAttribute('aria-expanded','false')}));
+const mobileMenu=document.querySelector('#mobileMenu'),mobileNav=document.querySelector('#mobileNav');
+mobileMenu.addEventListener('click',()=>{const open=mobileNav.hidden;mobileNav.hidden=!open;mobileMenu.setAttribute('aria-expanded',String(open));});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileNav.hidden=true;mobileMenu.setAttribute('aria-expanded','false');}));
 track('page_loaded',{path:location.pathname,remembered_cashback_email:Boolean(localStorage.getItem('savebyai_cashback_email'))});

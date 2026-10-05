@@ -5,14 +5,14 @@
     "category": "Fashion",
     "tier": "Live - Tracked Partner",
     "network": "Admitad",
-    "cashbackRule": "Verify before enabling",
+    "cashbackRule": "Allowed",
     "approvalDependency": "Joined / auto moderation",
     "buildStatus": "Live tracked route",
-    "nextVerification": "Confirm cashback traffic permission + set customer payout rate",
-    "state": "Affiliate tracking live",
+    "nextVerification": "Monitor programme rate/rules and customer economics",
+    "state": "Cashback live",
     "live": true,
     "seoPath": "/stores/bewakoof.html",
-    "offerHeadline": "Up to 70% off clearance + selected multi-buy offers",
+    "offerHeadline": "₹200 SaveByAI cashback on ₹2,000 spend + up to 70% clearance",
     "verifiedAt": "5 Oct 2026",
     "verifiedOffers": [
       {
@@ -33,7 +33,11 @@
     ],
     "paymentOffers": [],
     "sourceLabel": "Bewakoof official sale pages",
-    "sourceUrl": "https://www.bewakoof.com/clearance-sale"
+    "sourceUrl": "https://www.bewakoof.com/clearance-sale",
+    "cashbackRateBps": 1000,
+    "cashbackLabel": "10% SaveByAI cashback",
+    "cashbackExampleSpend": 2000,
+    "cashbackExampleAmount": 200
   },
   {
     "slug": "nilkamal",
@@ -77,14 +81,14 @@
     "category": "Beauty & Wellness",
     "tier": "Live - Tracked Partner",
     "network": "Admitad",
-    "cashbackRule": "Verify before enabling",
+    "cashbackRule": "Allowed",
     "approvalDependency": "Joined / auto moderation",
     "buildStatus": "Live tracked route",
-    "nextVerification": "Confirm cashback traffic permission + set customer payout rate",
-    "state": "Affiliate tracking live",
+    "nextVerification": "Monitor programme rate/rules and customer economics",
+    "state": "Cashback live",
     "live": true,
     "seoPath": "/stores/kama-ayurveda.html",
-    "offerHeadline": "10% off first order + MobiKwik & Amex payment offers",
+    "offerHeadline": "₹240 SaveByAI cashback on ₹2,000 spend + current Kama offers",
     "verifiedAt": "5 Oct 2026",
     "verifiedOffers": [
       {
@@ -116,7 +120,11 @@
       }
     ],
     "sourceLabel": "Kama Ayurveda official website",
-    "sourceUrl": "https://www.kamaayurveda.in/happy-hydration-category.html"
+    "sourceUrl": "https://www.kamaayurveda.in/happy-hydration-category.html",
+    "cashbackRateBps": 1200,
+    "cashbackLabel": "12% SaveByAI cashback",
+    "cashbackExampleSpend": 2000,
+    "cashbackExampleAmount": 240
   },
   {
     "slug": "digihaat",

@@ -48,20 +48,20 @@
   </div>
   <aside class="hero-panel" aria-label="How SaveByAI cashback works">
     <div class="hero-panel-top"><span>YOUR SAVINGS FLOW</span><b>Simple by design</b></div>
-    <div class="flow-step"><i>1</i><div><b>Find a store</b><span>See eligible routes and verified savings.</span></div></div>
+    <div class="flow-step"><i>1</i><div><b>Check the savings</b><span>See store offers, payment offers and SaveByAI cashback.</span></div></div>
     <div class="flow-line"></div>
-    <div class="flow-step"><i>2</i><div><b>Activate cashback</b><span>Enter only your email when cashback is available.</span></div></div>
+    <div class="flow-step"><i>2</i><div><b>See cashback in ₹</b><span>Enter your planned spend and we estimate the amount back.</span></div></div>
     <div class="flow-line"></div>
-    <div class="flow-step"><i>3</i><div><b>Shop normally</b><span>We attach a unique tracking ID before redirecting you.</span></div></div>
+    <div class="flow-step"><i>3</i><div><b>Activate & shop</b><span>Add your email, shop normally and follow the cashback in My SaveByAI.</span></div></div>
     <a href="/my.html" class="soft-link">Already shopped? Open My SaveByAI →</a>
   </aside>
 </section>
 
 <section class="value-strip shell" aria-label="SaveByAI benefits">
-  <div><strong>₹</strong><span><b>Cashback when eligible</b><small>Only where partner rules permit it</small></span></div>
-  <div><strong>↗</strong><span><b>One-click tracking</b><small>Unique click ID linked to your trip</small></span></div>
-  <div><strong>✉</strong><span><b>Email, not passwords</b><small>Lightweight identity for cashback</small></span></div>
-  <div><strong>✓</strong><span><b>Clear status</b><small>Tracked, pending, confirmed or declined</small></span></div>
+  <div><strong>₹</strong><span><b>SaveByAI cashback</b><small>Part of our affiliate commission comes back to you</small></span></div>
+  <div><strong>🏷</strong><span><b>Store offers</b><small>Coupons and live merchant promotions</small></span></div>
+  <div><strong>💳</strong><span><b>Bank & wallet offers</b><small>Extra savings where verified and eligible</small></span></div>
+  <div><strong>✓</strong><span><b>One place to check</b><small>Know the likely saving before you buy</small></span></div>
 </section>
 
 <section class="section shell" id="stores">
@@ -132,15 +132,17 @@
     <span class="kicker">CASHBACK ACTIVATION</span>
     <h2 id="modalTitle">Activate cashback</h2>
     <p class="modal-merchant" id="modalMerchant"></p>
-    <div class="reward-box"><span>Your eligible cashback</span><strong id="modalCashback"></strong><small id="modalNote"></small></div>
+    <div class="reward-box"><span>Your estimated cashback</span><strong id="modalCashback"></strong><small><b id="modalRate"></b><br><span id="modalNote"></span></small></div>
     <form id="cashbackForm">
-      <label for="cashbackEmail">Where should we attach the cashback?</label>
+      <label for="cashbackSpend">How much are you planning to spend?</label>
+      <div class="money-input"><span>₹</span><input id="cashbackSpend" type="number" min="1" max="1000000" step="1" inputmode="numeric" value="2000" required></div>
+      <label for="cashbackEmail">Email for cashback tracking</label>
       <input id="cashbackEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
       <button class="btn btn-primary" id="activateCashbackBtn" type="submit">Activate cashback & shop</button>
       <p class="microcopy">No password. Your email is used to attach this shopping trip to your cashback record and send essential cashback updates.</p>
       <p id="cashbackStatus" class="form-status" aria-live="polite"></p>
     </form>
-    <button class="text-button" id="continueWithoutCashback" type="button">Continue without cashback</button>
+    <button class="text-button" id="continueWithoutCashback" type="button">Shop without SaveByAI cashback</button>
     <a class="modal-claim" href="/claim.html">Already purchased? Claim missing cashback →</a>
   </div>
 </div>

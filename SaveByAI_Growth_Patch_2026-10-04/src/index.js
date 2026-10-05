@@ -3,9 +3,9 @@ const ALLOWED_EVENTS=new Set([
   'affiliate_click','cashback_modal_opened','cashback_started','cashback_claim_submitted'
 ]);
 
-// Customer cashback must stay OFF until the programme explicitly permits cashback/incentive traffic
-// and the customer-facing rate has been decided and verified.
-// When verified, set cashbackEnabled:true + cashbackLabel + cashbackRateBps (e.g. 500 = 5.00%).
+// Cashback is enabled only where the programme explicitly permits cashback traffic.
+// cashbackRateBps is the customer-facing rate (1000 = 10.00%).
+// The user's planned spend is only an estimate; final cashback uses the eligible tracked order value confirmed by the merchant/network.
 const AFFILIATE_MERCHANTS=Object.freeze({
   nilkamal:{
     name:'Nilkamal', network:'admitad',
@@ -16,14 +16,14 @@ const AFFILIATE_MERCHANTS=Object.freeze({
   bewakoof:{
     name:'Bewakoof', network:'admitad',
     affiliateUrl:'https://tjzuh.com/g/el5arbwari5b3c27b0b28f3bde6dea/', live:true,
-    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
-    customerNote:'Tracked partner shopping is live. SaveByAI is verifying cashback eligibility before promising a customer rate.'
+    cashbackEnabled:true, cashbackLabel:'10% SaveByAI cashback', cashbackRateBps:1000,
+    customerNote:'Estimated cashback is based on your planned spend. Final cashback is based on the eligible tracked order value after Bewakoof confirms a successful delivered sale.'
   },
   'kama-ayurveda':{
     name:'Kama Ayurveda', network:'admitad',
     affiliateUrl:'https://tjzuh.com/g/yqewe0ii4c5b3c27b0b2238bfeb32d/', live:true,
-    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
-    customerNote:'India-targeted tracked partner route is live. Cashback will only be shown after traffic permission and payout rules are verified.'
+    cashbackEnabled:true, cashbackLabel:'12% SaveByAI cashback', cashbackRateBps:1200,
+    customerNote:'Estimated cashback is based on your planned spend. Final cashback is based on the eligible tracked order value after Kama Ayurveda confirms the sale.'
   },
   digihaat:{
     name:'DigiHaat', network:'admitad',
@@ -45,6 +45,8 @@ function refHost(request){try{return new URL(request.headers.get('referer')||'')
 function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)&&v.length<=254}
 function validDate(v){return !v||/^\d{4}-\d{2}-\d{2}$/.test(v)}
 function affiliateUrlWithClickId(baseUrl,clickId){const target=new URL(baseUrl);target.searchParams.set('subid4',clickId);return target.toString()}
+function cleanMoney(v,max=1000000){const n=Number(v);if(!Number.isFinite(n)||n<=0)return 0;return Math.min(Math.round(n*100)/100,max)}
+function estimateCashback(config,plannedSpend){return config.cashbackEnabled&&config.cashbackRateBps?Math.round((plannedSpend*config.cashbackRateBps/10000)*100)/100:0}
 
 async function logEvent(env,request,eventName,anonId,path,props={}){
   if(!ALLOWED_EVENTS.has(eventName))return;
@@ -73,10 +75,10 @@ async function ensureCashbackUser(env,email){
   }
 }
 
-async function createAffiliateClick(env,request,merchant,config,{anonId='',userId=null}={}){
+async function createAffiliateClick(env,request,merchant,config,{anonId='',userId=null,plannedSpend=0,estimatedCashback=0}={}){
   const clickId=crypto.randomUUID();
   const now=new Date().toISOString();
-  const props={merchant,network:config.network,click_id:clickId,subid4:clickId,cashback_enabled:Boolean(config.cashbackEnabled)};
+  const props={merchant,network:config.network,click_id:clickId,subid4:clickId,cashback_enabled:Boolean(config.cashbackEnabled),cashback_rate_bps:config.cashbackRateBps??null,planned_spend:plannedSpend||0,estimated_cashback:estimatedCashback||0};
   if(userId)props.user_id=userId;
 
   // Keep the proven event stream working even if the cashback tables are not yet migrated.
@@ -133,15 +135,17 @@ export default{async fetch(request,env){
       const merchant=text(b.merchant,80).toLowerCase();const config=AFFILIATE_MERCHANTS[merchant];
       if(!config||!config.live)return json({error:'This partner route is not live yet.'},404);
       const anonId=text(b.anon_id,80);const email=text(b.email,254).toLowerCase();
+      const plannedSpend=cleanMoney(b.planned_spend);
+      const estimatedCashback=estimateCashback(config,plannedSpend);
       let userId=null;
       if(email){
         if(!config.cashbackEnabled)return json({error:'Customer cashback is not enabled for this merchant yet.'},409);
         if(!validEmail(email))return json({error:'Please enter a valid email.'},400);
         userId=await ensureCashbackUser(env,email);
       }
-      const {clickId,redirectUrl}=await createAffiliateClick(env,request,merchant,config,{anonId,userId});
-      try{await logEvent(env,request,'cashback_started',anonId,'/',{merchant,click_id:clickId,identified:Boolean(userId),cashback_enabled:Boolean(config.cashbackEnabled)})}catch{}
-      return json({ok:true,click_id:clickId,user_id:userId,redirect_url:redirectUrl,cashback_enabled:Boolean(config.cashbackEnabled),cashback_label:config.cashbackLabel||''});
+      const {clickId,redirectUrl}=await createAffiliateClick(env,request,merchant,config,{anonId,userId,plannedSpend,estimatedCashback});
+      try{await logEvent(env,request,'cashback_started',anonId,'/',{merchant,click_id:clickId,identified:Boolean(userId),cashback_enabled:Boolean(config.cashbackEnabled),cashback_rate_bps:config.cashbackRateBps??null,planned_spend:plannedSpend,estimated_cashback:estimatedCashback})}catch{}
+      return json({ok:true,click_id:clickId,user_id:userId,redirect_url:redirectUrl,cashback_enabled:Boolean(config.cashbackEnabled),cashback_label:config.cashbackLabel||'',cashback_rate_bps:config.cashbackRateBps??null,planned_spend:plannedSpend,estimated_cashback:estimatedCashback});
     }catch(e){console.error(e);return json({error:'Could not start this shopping trip. Please try again.'},500)}
   }
 
