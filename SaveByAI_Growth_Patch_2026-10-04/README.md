@@ -1,3 +1,7 @@
+# SaveByAI Cashback MVP v5 — first traffic build
+
+This build makes five Admitad merchant routes live and adds indexable static store pages for Google.
+
 # SaveByAI v4 — dashboard separation + API-first affiliate plan
 
 This build separates **My SaveByAI** (dashboard/account-like area) from **Claim Cashback** (recovery-only flow). It also includes an API-first affiliate automation plan and an Admitad XML scanner under `tools/`.

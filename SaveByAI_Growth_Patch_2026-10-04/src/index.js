@@ -8,14 +8,34 @@ const ALLOWED_EVENTS=new Set([
 // When verified, set cashbackEnabled:true + cashbackLabel + cashbackRateBps (e.g. 500 = 5.00%).
 const AFFILIATE_MERCHANTS=Object.freeze({
   nilkamal:{
-    name:'Nilkamal',
-    network:'admitad',
-    affiliateUrl:'https://tjzuh.com/g/0r8jdq3sst5b3c27b0b2c70051888a/',
-    live:true,
-    cashbackEnabled:false,
-    cashbackLabel:'Cashback rate being verified',
-    cashbackRateBps:null,
-    customerNote:'Partner tracking is live. Customer cashback will only be switched on after programme permission and the payout rate are verified.'
+    name:'Nilkamal', network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/0r8jdq3sst5b3c27b0b2c70051888a/', live:true,
+    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
+    customerNote:'Tracked partner shopping is live. Customer cashback will only be enabled after cashback traffic permission and a sustainable customer rate are verified.'
+  },
+  bewakoof:{
+    name:'Bewakoof', network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/el5arbwari5b3c27b0b28f3bde6dea/', live:true,
+    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
+    customerNote:'Tracked partner shopping is live. SaveByAI is verifying cashback eligibility before promising a customer rate.'
+  },
+  'kama-ayurveda':{
+    name:'Kama Ayurveda', network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/yqewe0ii4c5b3c27b0b2238bfeb32d/', live:true,
+    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
+    customerNote:'India-targeted tracked partner route is live. Cashback will only be shown after traffic permission and payout rules are verified.'
+  },
+  digihaat:{
+    name:'DigiHaat', network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/i7u4l9z7j45b3c27b0b2bd39749ffb/', live:true,
+    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
+    customerNote:'Tracked partner shopping is live. Customer cashback remains off until programme rules are verified.'
+  },
+  palmonas:{
+    name:'Palmonas', network:'admitad',
+    affiliateUrl:'https://tjzuh.com/g/cozq2t2pxu5b3c27b0b248f53de592/', live:true,
+    cashbackEnabled:false, cashbackLabel:'Cashback verification in progress', cashbackRateBps:null,
+    customerNote:'Tracked partner shopping is live. Customer cashback remains off until programme permission and rate are verified.'
   }
 });
 
