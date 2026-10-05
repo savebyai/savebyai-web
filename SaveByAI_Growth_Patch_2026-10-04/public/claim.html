@@ -3,32 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>My Savings — SaveByAI</title>
-  <meta name="description" content="See your recent SaveByAI shopping trips and claim missing cashback using your email.">
+  <title>Claim Missing Cashback — SaveByAI</title>
+  <meta name="description" content="Recover a missing SaveByAI cashback purchase using your tracked shopping trip and email.">
   <link rel="canonical" href="https://savebyai.in/claim">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <header class="topbar shell claim-topbar">
   <a class="brand" href="/" aria-label="SaveByAI home">SaveByAI<span>.</span></a>
-  <nav aria-label="Savings navigation"><a href="/">Home</a><a class="nav-claim active" href="/claim.html">My Savings</a></nav>
+  <nav aria-label="Cashback navigation"><a href="/">Home</a><a href="/my.html">My SaveByAI</a><a class="nav-claim active" href="/claim.html">Claim Cashback</a></nav>
 </header>
 <main class="claim-page shell">
   <a class="back-link" href="/">← Back to SaveByAI</a>
   <section class="claim-hero savings-hero">
-    <span class="kicker">MY SAVINGS</span>
-    <h1>Your savings,<br><span>in one place.</span></h1>
-    <p>See recent tracked shopping trips on this device, connect them to your email, and recover cashback when something was missed. No password needed.</p>
-    <div class="savings-summary" aria-label="Savings activity on this device">
-      <div><span>Recent tracked trips</span><strong id="tripCount">0</strong><small>This browser</small></div>
-      <div><span>Claims submitted</span><strong id="claimCount">0</strong><small>This browser</small></div>
-      <div><span>Cashback balance</span><strong>Coming soon</strong><small>After network transaction sync</small></div>
-    </div>
+    <span class="kicker">MISSING CASHBACK</span>
+    <h1>Recover a purchase<br><span>that did not attach.</span></h1>
+    <p>This page is only for cashback recovery. Choose a tracked SaveByAI shopping trip when possible, add your email and order details, and we will try to match it.</p>
   </section>
 
   <div class="claim-layout">
     <section class="recent-panel">
-      <div class="panel-head"><div><span class="kicker">RECENT TRIPS</span><h2>Your tracked shopping</h2></div><span class="privacy-chip">This device only</span></div>
+      <div class="panel-head"><div><span class="kicker">TRACKED TRIPS</span><h2>Choose the purchase route</h2></div><span class="privacy-chip">This device only</span></div>
       <p class="panel-copy">If you started shopping through SaveByAI, choose the matching trip before submitting a missing-cashback claim.</p>
       <div id="recentTrips" class="recent-trips"></div>
       <p class="microcopy">Trip IDs are stored locally in this browser. Clearing browser storage can remove them.</p>
@@ -37,8 +32,8 @@
     <section class="claim-form-card">
       <div id="claimSuccess" class="claim-success" hidden role="status" aria-live="polite"></div>
       <div id="claimFormWrap">
-        <span class="kicker">CLAIM MISSING CASHBACK</span>
-        <h2 id="claimTitle">Recover a purchase.</h2>
+        <span class="kicker">SUBMIT A CLAIM</span>
+        <h2 id="claimTitle">Tell us about the purchase.</h2>
         <p class="claim-intro" id="claimIntro">If your purchase started through SaveByAI, we’ll try to match it to a tracked click. A tracked click gives us the best chance of recovering it.</p>
         <form id="claimForm" class="claim-form">
           <input type="hidden" id="claimClickId">
@@ -55,9 +50,9 @@
     </section>
   </div>
 
-  <div class="claim-rules"><h3>How cashback status will work</h3><p><b>Tracked</b> means the network detected the transaction. <b>Pending</b> means the advertiser is validating it. <b>Confirmed</b> means the commission was approved. <b>Available</b> means it can be redeemed. Until network transaction sync is connected, My Savings shows your local tracked trips and submitted claims only.</p></div>
+  <div class="claim-rules"><h3>How cashback status will work</h3><p><b>Tracked</b> means the network detected the transaction. <b>Pending</b> means the advertiser is validating it. <b>Confirmed</b> means the commission was approved. <b>Available</b> means it can be redeemed. Until network transaction sync is connected, My SaveByAI shows local browser activity while this claim page remains only for recovery.</p></div>
 </main>
-<footer class="shell"><div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check before you buy.</p></div><div class="footer-links"><a href="/claim.html">My Savings</a><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></footer>
+<footer class="shell"><div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check before you buy.</p></div><div class="footer-links"><a href="/my.html">My SaveByAI</a><a href="/claim.html">Claim Cashback</a><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></footer>
 <script src="/claim.js" type="module"></script>
 </body>
 </html>

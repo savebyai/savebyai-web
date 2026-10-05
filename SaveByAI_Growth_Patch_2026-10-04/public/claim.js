@@ -42,6 +42,23 @@ function markTripClaimed(clickId){
   renderTrips();
 }
 
+
+function saveClaimLocally(data,body){
+  try{
+    const items=JSON.parse(localStorage.getItem('savebyai_claims')||'[]');
+    items.unshift({
+      claim_id:data.claim_id||'',
+      merchant:body.merchant||'',
+      email:body.email||'',
+      created_at:new Date().toISOString(),
+      status:data.status||'submitted',
+      matched:Boolean(data.matched),
+      click_id:body.click_id||''
+    });
+    localStorage.setItem('savebyai_claims',JSON.stringify(items.slice(0,30)));
+  }catch{}
+}
+
 function showSuccess(data,body){
   const ref=(data.claim_id||'').slice(0,8).toUpperCase();
   const matched=Boolean(data.matched);
@@ -61,7 +78,7 @@ function showSuccess(data,body){
       <span>Status</span><strong>${matched?'Tracked click linked':'Manual review'}</strong>
     </div>
     <div class="success-actions"><a class="btn btn-primary" href="/">Back to SaveByAI</a><button class="btn btn-secondary" id="anotherClaim" type="button">Submit another claim</button></div>`;
-  successEl.querySelector('#anotherClaim')?.addEventListener('click',()=>{successEl.hidden=true;formWrap.hidden=false;form.reset();document.querySelector('#claimClickId').value='';document.querySelector('#selectedTrip').hidden=true;document.querySelector('#claimEmail').value=localStorage.getItem('savebyai_cashback_email')||'';document.querySelector('#claimTitle').textContent='Recover a purchase.';document.querySelector('#claimIntro').textContent='If your purchase started through SaveByAI, we’ll try to match it to a tracked click. A tracked click gives us the best chance of recovering it.';statusEl.textContent='';formWrap.scrollIntoView({behavior:'smooth',block:'start'})});
+  successEl.querySelector('#anotherClaim')?.addEventListener('click',()=>{successEl.hidden=true;formWrap.hidden=false;form.reset();document.querySelector('#claimClickId').value='';document.querySelector('#selectedTrip').hidden=true;document.querySelector('#claimEmail').value=localStorage.getItem('savebyai_cashback_email')||'';document.querySelector('#claimTitle').textContent='Tell us about the purchase.';document.querySelector('#claimIntro').textContent='If your purchase started through SaveByAI, we’ll try to match it to a tracked click. A tracked click gives us the best chance of recovering it.';statusEl.textContent='';formWrap.scrollIntoView({behavior:'smooth',block:'start'})});
   successEl.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
@@ -98,6 +115,7 @@ form.addEventListener('submit',async e=>{
     const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not submit claim');
     localStorage.setItem('savebyai_cashback_email',body.email);
     if(data.matched)markTripClaimed(body.click_id);
+    saveClaimLocally(data,body);
     showSuccess(data,body);
   }catch(err){statusEl.className='form-status error';statusEl.textContent=err.message||'Please try again.'}
   finally{submitBtn.disabled=false;submitBtn.textContent=oldText}

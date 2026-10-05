@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My SaveByAI — Cashback, Trips & Alerts</title>
+  <meta name="description" content="Your SaveByAI dashboard for recent tracked shopping trips, cashback activity, claims and deal alerts.">
+  <link rel="canonical" href="https://savebyai.in/my">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar shell claim-topbar">
+  <a class="brand" href="/" aria-label="SaveByAI home">SaveByAI<span>.</span></a>
+  <nav aria-label="Account navigation"><a href="/">Home</a><a class="nav-claim active" href="/my.html">My SaveByAI</a><a href="/claim.html">Claim Cashback</a></nav>
+</header>
+
+<main class="my-page shell">
+  <a class="back-link" href="/">← Back to SaveByAI</a>
+
+  <section class="my-hero">
+    <div>
+      <span class="kicker">MY SAVEBYAI</span>
+      <h1>Your shopping,<br><span>rewards and savings.</span></h1>
+      <p>This is your lightweight SaveByAI dashboard. No password is required in the beta. Activity shown here is currently tied to this browser until secure email access is added.</p>
+    </div>
+    <div class="identity-card">
+      <span>Cashback identity</span>
+      <strong id="identityValue">Not connected yet</strong>
+      <small id="identityHint">Your email is saved here after you activate eligible cashback or submit a claim.</small>
+    </div>
+  </section>
+
+  <section class="dashboard-stats" aria-label="SaveByAI activity">
+    <article><span>Tracked shopping trips</span><strong id="myTripCount">0</strong><small>This browser</small></article>
+    <article><span>Cashback claims</span><strong id="myClaimCount">0</strong><small>Saved on this browser</small></article>
+    <article><span>Confirmed rewards</span><strong id="confirmedReward">—</strong><small>Network transaction sync next</small></article>
+    <article><span>Total saved</span><strong id="totalSaved">—</strong><small>Will include cashback + verified savings</small></article>
+  </section>
+
+  <section class="dashboard-grid">
+    <article class="dashboard-card primary-dash">
+      <div class="dash-head"><span class="kicker">CASHBACK & REWARDS</span><span class="beta-chip">BETA</span></div>
+      <h2>Your cashback activity</h2>
+      <p>Once partner transaction APIs are connected, tracked purchases will appear here automatically as Tracked, Pending, Confirmed or Available.</p>
+      <div class="status-track">
+        <span><i>1</i>Tracked</span><b></b><span><i>2</i>Pending</span><b></b><span><i>3</i>Confirmed</span><b></b><span><i>4</i>Available</span>
+      </div>
+      <div class="dash-actions"><a class="btn btn-primary" href="/#stores">Find a store</a><a class="btn btn-secondary" href="/claim.html">Claim missing cashback</a></div>
+    </article>
+
+    <article class="dashboard-card">
+      <div class="dash-head"><span class="kicker">RECENT SHOPPING</span><span class="privacy-chip">This device</span></div>
+      <h2>Your tracked trips</h2>
+      <div id="myTrips" class="dashboard-list"></div>
+      <a class="inline-action" href="/claim.html">Recover a missing purchase →</a>
+    </article>
+
+    <article class="dashboard-card">
+      <div class="dash-head"><span class="kicker">CLAIMS</span></div>
+      <h2>Cashback recovery</h2>
+      <div id="myClaims" class="dashboard-list"></div>
+      <a class="inline-action" href="/claim.html">Submit another claim →</a>
+    </article>
+
+    <article class="dashboard-card">
+      <div class="dash-head"><span class="kicker">DEAL ALERTS</span></div>
+      <h2>Things worth watching</h2>
+      <p>Your deal-alert subscriptions are stored in SaveByAI's backend, but we do not expose them here by email until secure passwordless access is implemented.</p>
+      <a class="inline-action" href="/#early-access">Create a deal alert →</a>
+    </article>
+  </section>
+
+  <section class="security-note">
+    <div><span class="kicker">WHY NO PASSWORD?</span><h3>Low friction first. Secure account access next.</h3></div>
+    <p>During validation, SaveByAI uses a lightweight email identity at cashback activation. Before we expose balances, personal transaction history or withdrawals across devices, we will require secure email verification/magic-link access.</p>
+  </section>
+</main>
+
+<footer class="shell"><div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check before you buy.</p></div><div class="footer-links"><a href="/my.html">My SaveByAI</a><a href="/claim.html">Claim Cashback</a><a href="/affiliate-disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></footer>
+<script src="/my.js" type="module"></script>
+</body>
+</html>

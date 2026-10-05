@@ -1,3 +1,18 @@
+# SaveByAI v4 — dashboard separation + API-first affiliate plan
+
+This build separates **My SaveByAI** (dashboard/account-like area) from **Claim Cashback** (recovery-only flow). It also includes an API-first affiliate automation plan and an Admitad XML scanner under `tools/`.
+
+**No D1 schema change is required for this build.**
+
+Key files:
+- `public/my.html` / `public/my.js` — lightweight dashboard
+- `public/claim.html` / `public/claim.js` — missing-cashback recovery only
+- `AFFILIATE_API_AUTOMATION.md` — network integration plan
+- `ADMITAD_CASHBACK_CANDIDATES_2026-10-05.md` — candidates from the current program export
+- `tools/admitad_program_scan.py` — repeatable XML scan
+
+---
+
 # SaveByAI v0.3 Growth Patch — 4 Oct 2026
 
 Purpose: make the existing MVP ready for anonymous cold-user validation while affiliate approvals are pending.
