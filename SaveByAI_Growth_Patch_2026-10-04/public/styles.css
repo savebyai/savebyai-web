@@ -166,3 +166,33 @@ footer{padding-top:30px;padding-bottom:48px;border-top:1px solid var(--line);dis
   .content-page-grid,.contact-grid{grid-template-columns:1fr}
   .contact-primary{grid-row:auto}
 }
+
+
+/* v0.4 — focused validation funnel */
+.beta-banner{display:inline-flex;align-items:center;gap:8px;background:#e8f7f3;border:1px solid #cdece5;border-radius:999px;padding:7px 11px;margin-bottom:16px;font-size:10px;font-weight:900;color:var(--teal);letter-spacing:.04em}
+.beta-banner b{font-size:9px;background:var(--teal);color:#fff;border-radius:999px;padding:4px 7px}
+.focused-primary-cta{display:inline-flex;margin-top:25px;padding:17px 22px;font-size:14px}
+.focused-trust{margin-top:18px}
+.focused-rule{max-width:680px;font-size:12px;line-height:1.65;color:var(--muted);margin-top:18px}
+.focused-rule strong{color:var(--navy)}
+.focused-how{padding-top:60px}
+.focused-mid-cta{max-width:760px;margin:34px auto 0;text-align:center;background:var(--mint);border:1px solid #d3ede7;border-radius:22px;padding:27px}
+.focused-mid-cta h3{font-size:23px;margin:0 0 8px}
+.focused-mid-cta p{color:var(--muted);font-size:12px;margin:0 0 17px}
+.existing-user-strip{display:flex;align-items:center;justify-content:space-between;gap:28px;background:#f7fafb;border:1px solid var(--line);border-radius:22px;margin-bottom:65px;padding:28px}
+.existing-user-strip h2{font-size:24px;margin:5px 0 8px}
+.existing-user-strip p{max-width:720px;color:var(--muted);font-size:12px;line-height:1.65;margin:0}
+.existing-user-links{display:flex;flex-direction:column;align-items:flex-end;gap:10px;min-width:190px}
+.existing-user-links a{font-size:12px;font-weight:900;color:var(--teal)}
+@media(max-width:720px){
+  .focused-home-hero{padding-top:28px!important;padding-bottom:28px!important}
+  .focused-home-hero h1{font-size:43px!important;line-height:1.02!important;letter-spacing:-2px!important;margin-top:4px!important}
+  .focused-home-hero .lead{font-size:14px!important;line-height:1.55!important;margin-top:13px!important}
+  .focused-primary-cta{display:flex;width:100%;justify-content:center;margin-top:18px!important;padding:16px 14px!important}
+  .focused-trust{display:grid!important;grid-template-columns:1fr 1fr;gap:6px 10px!important;margin-top:14px!important;font-size:10px!important}
+  .focused-rule{font-size:10.5px!important;margin-top:12px!important}
+  .focused-hero-panel{display:none!important}
+  .value-strip{margin-top:0!important}
+  .existing-user-strip{flex-direction:column;align-items:flex-start}
+  .existing-user-links{align-items:flex-start}
+}

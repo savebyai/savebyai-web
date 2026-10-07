@@ -3,134 +3,103 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="mitgo-verification" content="eaf4a017-b001-44a9-8a27-69e098913056">
-  <meta name="mitgo-verification" content="c4b7d969-8b4f-4727-9cde-0141c1b86bf5">
+  <meta name="theme-color" content="#f7fafc">
   <title>SaveByAI — Find where your household can save</title>
-  <meta name="description" content="SaveByAI helps Indian households identify areas worth reviewing across everyday spending, with shopping cashback as one savings route.">
+  <meta name="description" content="Take a free 2-minute household savings check. SaveByAI highlights everyday spending areas worth reviewing without asking for bank logins or card numbers.">
   <link rel="canonical" href="https://savebyai.in/">
   <meta property="og:title" content="SaveByAI — Find where your household can save">
-  <meta property="og:description" content="A household savings beta that checks where everyday spending may be worth reviewing.">
+  <meta property="og:description" content="A free 2-minute household savings check for India. No bank login. No card numbers.">
   <meta property="og:url" content="https://savebyai.in/">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="/styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SaveByAI","url":"https://savebyai.in/","description":"India-first household savings platform. Shopping cashback is one savings mechanism."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"SaveByAI","url":"https://savebyai.in/","description":"India-first household savings platform testing practical ways to reduce everyday spending."}</script>
 </head>
 <body>
+
 <header class="topbar shell">
   <a class="brand" href="/" aria-label="SaveByAI home">SaveByAI<span>.</span></a>
   <nav aria-label="Main navigation">
     <a href="/household-savings.html">Savings Check</a>
-    <a href="#stores">Shopping</a>
-    <a href="#how-it-works">How it works</a>
+    <a href="/how-it-works.html">How it works</a>
     <a class="nav-claim" href="/my.html">My SaveByAI</a>
   </nav>
-  <button class="mobile-menu" id="mobileMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+  <button class="mobile-menu" id="homeMobileMenu" aria-label="Open menu" aria-expanded="false">☰</button>
 </header>
-<div class="mobile-nav" id="mobileNav" hidden><a href="/household-savings.html">Savings Check</a><a href="#stores">Shopping</a><a href="#how-it-works">How it works</a><a href="/my.html">My SaveByAI</a></div>
+<div class="mobile-nav" id="homeMobileNav" hidden>
+  <a href="/household-savings.html">Savings Check</a>
+  <a href="/how-it-works.html">How it works</a>
+  <a href="/my.html">My SaveByAI</a>
+</div>
 
 <main>
-<section class="hero shell household-home-hero" id="search">
-  <div class="hero-copy">
-    <div class="eyebrow"><span class="pulse"></span> HOUSEHOLD SAVINGS BETA</div>
-    <h1>Find where your household can <span>save money.</span></h1>
-    <p class="lead">SaveByAI checks everyday household spending for practical areas worth reviewing, then recommends the route that saves you most — even when we earn nothing.</p>
-    <div class="hero-cta-row">
-      <a class="btn btn-primary hero-main-cta" href="/household-savings.html">Start the free 2-minute Savings Check</a>
-      <a class="hero-secondary-cta" href="#stores">I’m shopping now →</a>
-    </div>
-    <div class="hero-trust">
-      <span>✓ No bank login</span>
-      <span>✓ No card numbers</span>
-      <span>✓ No guaranteed-savings gimmicks</span>
-    </div>
-    <div class="home-shopping-search">
-      <small>Already know where you’re shopping? Check a supported store.</small>
-      <div class="searchbox compact-search" role="search">
-        <div class="search-icon" aria-hidden="true">⌕</div>
-        <input id="q" placeholder="Search Bewakoof, Kama Ayurveda, furniture..." autocomplete="off" aria-label="Search stores and categories">
-        <button id="searchBtn">Check shopping</button>
+  <section class="hero shell focused-home-hero">
+    <div class="hero-copy">
+      <div class="beta-banner"><b>EARLY BETA</b><span>Household Savings Check</span></div>
+      <h1>Find where your household can <span>save money.</span></h1>
+      <p class="lead">Give SaveByAI about two minutes of household context. We’ll highlight everyday spending areas that may be worth reviewing — without exaggerated savings claims.</p>
+
+      <a class="btn btn-primary focused-primary-cta" href="/household-savings.html">Start the free 2-minute Savings Check →</a>
+
+      <div class="hero-trust focused-trust">
+        <span>✓ No bank login</span>
+        <span>✓ No card numbers</span>
+        <span>✓ No guaranteed-savings gimmicks</span>
       </div>
-      <div class="chips"><span>Popular:</span><button data-q="Fashion">Fashion</button><button data-q="Beauty">Beauty</button><button data-q="Furniture">Furniture</button></div>
+
+      <p class="focused-rule">Our rule: <strong>recommend what saves you the most, even when SaveByAI earns nothing.</strong></p>
     </div>
-  </div>
-  <aside class="hero-panel" aria-label="How the SaveByAI household savings beta works">
-    <div class="hero-panel-top"><span>YOUR FIRST SAVINGS CHECK</span><b>About 2 minutes</b></div>
-    <div class="flow-step"><i>1</i><div><b>Enter rough monthly spending</b><span>Shopping, subscriptions, fuel, telecom, groceries and bills.</span></div></div>
-    <div class="flow-line"></div>
-    <div class="flow-step"><i>2</i><div><b>See areas worth reviewing</b><span>We do not manufacture a giant “you will save ₹X” number.</span></div></div>
-    <div class="flow-line"></div>
-    <div class="flow-step"><i>3</i><div><b>Request a beta review</b><span>Early beta reviews are prepared individually so you get practical next steps, not a generic score.</span></div></div>
-    <a href="/household-savings.html" class="soft-link">Start Household Savings Check →</a>
-  </aside>
-</section>
 
-<section class="value-strip shell" aria-label="SaveByAI savings approach">
-  <div><strong>⌂</strong><span><b>Household-first</b><small>Start from what your family actually spends</small></span></div>
-  <div><strong>↘</strong><span><b>Reduce waste</b><small>Subscriptions, plans and recurring costs worth reviewing</small></span></div>
-  <div><strong>₹</strong><span><b>Shopping savings</b><small>Cashback and verified offers where supported</small></span></div>
-  <div><strong>✓</strong><span><b>Trust first</b><small>Best saving route first, our commission second</small></span></div>
-</section>
+    <aside class="hero-panel focused-hero-panel" aria-label="How the SaveByAI Savings Check works">
+      <div class="hero-panel-top"><span>YOUR FIRST CHECK</span><b>3 simple steps</b></div>
+      <div class="flow-step"><i>1</i><div><b>Enter rough monthly spending</b><span>Shopping, subscriptions, fuel, telecom, groceries and recurring bills.</span></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><i>2</i><div><b>See areas worth reviewing</b><span>No manufactured “you will save ₹X” headline.</span></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><i>3</i><div><b>Request a personalised beta review</b><span>Early reviews are prepared individually to produce practical next steps.</span></div></div>
+    </aside>
+  </section>
 
-<section class="section shell compact-shopping" id="stores">
-  <div class="shopping-callout">
-    <div><span class="kicker">SHOPPING SAVINGS</span><h2>Already planning a purchase?</h2><p>Cashback and verified offers remain available at supported stores. Shopping is one savings mechanism inside SaveByAI.</p></div>
-    <a class="btn audit-shop" href="/stores/">Browse supported stores →</a>
-  </div>
-  <details class="shopping-details">
-    <summary>Search shopping savings here</summary>
-    <div class="shopping-details-body">
-      <div class="filters"><select id="categoryFilter" aria-label="Filter by category"><option value="">All categories</option></select></div>
-      <p id="summary" class="summary"></p>
-      <div id="merchantGrid" class="merchant-grid"></div>
-      <div id="empty" class="empty" hidden>No matching store yet. Try another search.</div>
+  <section class="value-strip shell" aria-label="SaveByAI principles">
+    <div><strong>⌂</strong><span><b>Household-first</b><small>Start from what your family actually spends</small></span></div>
+    <div><strong>↘</strong><span><b>Practical actions</b><small>Reduce, switch, route, cancel or claim where useful</small></span></div>
+    <div><strong>✓</strong><span><b>Trust first</b><small>Customer saving first, our commission second</small></span></div>
+    <div><strong>₹</strong><span><b>No fake savings number</b><small>We highlight areas to investigate, not guaranteed outcomes</small></span></div>
+  </section>
+
+  <section class="how section shell focused-how" id="how-it-works">
+    <div class="section-head centered">
+      <div>
+        <span class="kicker">WHY SAVEBYAI?</span>
+        <h2>Practical savings, not another wall of deals.</h2>
+        <p>The first version is deliberately narrow. We start by understanding where your household spends, then identify where a closer review may actually be worthwhile.</p>
+      </div>
     </div>
-  </details>
-</section>
 
-<section class="how section shell" id="how-it-works">
-  <div class="section-head centered"><div><span class="kicker">HOW THE BETA WORKS</span><h2>Start with what your household actually spends.</h2><p>SaveByAI highlights practical areas worth reviewing and gives you a clear next step without exaggerated savings claims.</p></div></div>
-  <div class="steps-grid">
-    <article><div class="step-no">01</div><h3>Take the Savings Check</h3><p>Enter rough monthly spending. No bank access, card numbers or long financial onboarding.</p></article>
-    <article><div class="step-no">02</div><h3>See what is worth reviewing</h3><p>SaveByAI highlights areas to investigate rather than promising an invented annual saving.</p></article>
-    <article><div class="step-no">03</div><h3>Get a personalised review</h3><p>Early beta reviews are prepared individually so the recommendation is based on your situation rather than a generic percentage.</p></article>
-    <article><div class="step-no">04</div><h3>Shopping stays live</h3><p>Our existing cashback and claim tracking continues as one practical savings mechanism inside the larger vision.</p></article>
-  </div>
-  <div class="claim-banner"><div><span class="kicker">START HERE</span><h3>Give SaveByAI two minutes of household context.</h3><p>Save your result and request a closer review if you want practical next steps for your highest-priority spending area.</p></div><a class="btn btn-light" href="/household-savings.html">Start Savings Check</a></div>
-</section>
-
-<section id="calculator" class="section shell calculator-section">
-  <div class="section-head"><div><span class="kicker">EFFECTIVE PRICE</span><h2>See what you really pay.</h2></div><p>Combine only savings you genuinely have. The calculator does not assume offers can always be stacked.</p></div>
-  <div class="calculator">
-    <div class="inputs">
-      <label>Listed price ₹<input id="price" inputmode="decimal" placeholder="60000"></label>
-      <label>Coupon saving ₹<input id="coupon" inputmode="decimal" placeholder="2000"></label>
-      <label>Gift-card saving ₹<input id="gift" inputmode="decimal" placeholder="1000"></label>
-      <label>Bank/card offer ₹<input id="bank" inputmode="decimal" placeholder="3000"></label>
-      <label>Eligible cashback/reward ₹<input id="reward" inputmode="decimal" placeholder="1200"></label>
+    <div class="steps-grid">
+      <article><div class="step-no">01</div><h3>Tell us roughly where money goes</h3><p>Broad monthly estimates are enough. We do not need bank access, card numbers or financial documents.</p></article>
+      <article><div class="step-no">02</div><h3>Get a focused result</h3><p>Your result prioritises areas worth checking instead of repeating your numbers back to you.</p></article>
+      <article><div class="step-no">03</div><h3>Choose what you want help with</h3><p>You decide which area deserves a closer review first.</p></article>
+      <article><div class="step-no">04</div><h3>Get practical next steps</h3><p>Early beta reviews are prepared individually while SaveByAI learns which recommendations are genuinely useful.</p></article>
     </div>
-    <div class="calc-result"><span>Estimated effective price</span><strong id="effective">₹0</strong><div><span>Total saving</span><b id="saving">₹0</b></div><div><span>Saving %</span><b id="savingPct">0%</b></div><small>Entered values are yours, not automatic SaveByAI offer claims.</small></div>
-  </div>
-</section>
 
-<section id="guides" class="section shell">
-  <div class="section-head"><div><span class="kicker">BUYING GUIDES</span><h2>Find the real payable price, not just a headline discount.</h2></div><p>Compare the real payable price, card offers, exchange value, gift cards and eligible rewards.</p></div>
-  <div class="guide-grid"><a class="guide-card" data-guide="india-savings" href="/guides/how-to-save-money-shopping-online-india.html"><span>START HERE</span><h3>How to save money shopping online in India</h3><p>Store sale + coupon + bank/card + wallet + eligible cashback, without double-counting.</p><b>Read guide →</b></a>
-    <a class="guide-card" data-guide="myntra" href="/guides/how-to-save-on-myntra.html"><span>FASHION</span><h3>How to save on Myntra</h3><p>Sale price, coupons, bank offers and cashback without double-counting.</p><b>Read guide →</b></a>
-    <a class="guide-card" data-guide="amazon" href="/guides/amazon-savings-india.html"><span>SHOPPING</span><h3>Amazon India savings checklist</h3><p>Compare the real payable price, seller, card offer, exchange and eligible rewards.</p><b>Read guide →</b></a>
-    <a class="guide-card" data-guide="travel" href="/guides/makemytrip-savings.html"><span>TRAVEL</span><h3>How to compare travel deals</h3><p>Look past the headline fare and compare fees, coupons and cancellation terms.</p><b>Read guide →</b></a>
-  </div>
-</section>
+    <div class="focused-mid-cta">
+      <h3>Ready to check your household spending?</h3>
+      <p>It takes about two minutes and does not require account or banking credentials.</p>
+      <a class="btn btn-primary" href="/household-savings.html">Start Savings Check →</a>
+    </div>
+  </section>
 
-<section id="early-access" class="feedback shell deal-alerts">
-  <div><span class="kicker light">SMART DEAL ALERTS · BETA</span><h2>Tell us what you’re waiting to buy.</h2><p>Instead of scrolling through hundreds of random deals, add a product or store to the SaveByAI beta watchlist. We’ll email early users when we add a relevant verified savings route or useful deal alert.</p><div class="alert-examples"><span>iPhone price drop</span><span>AJIO cashback</span><span>Flight deal</span><span>Laptop offer</span></div></div>
-  <form id="leadForm" class="lead-form">
-    <label class="sr-only" for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
-    <label class="sr-only" for="interest">Product or store to watch</label><input id="interest" name="interest" type="text" placeholder="e.g. iPhone 17, AJIO, Delhi–Goa flight" required>
-    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to receive SaveByAI beta deal/savings alerts. I can opt out anytime.</span></label>
-    <input class="hp" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button type="submit">Watch this item or store</button><p id="leadStatus" class="form-status" aria-live="polite"></p>
-  </form>
-</section>
+  <section class="section shell existing-user-strip">
+    <div>
+      <span class="kicker">EXISTING SHOPPING USERS</span>
+      <h2>Shopping cashback is still available.</h2>
+      <p>If you already use SaveByAI for supported shopping partners, the existing cashback, tracking and missing-cashback claim flows remain live.</p>
+    </div>
+    <div class="existing-user-links">
+      <a href="/stores/">Shopping savings →</a>
+      <a href="/claim.html">Claim missing cashback →</a>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer shell">
@@ -142,28 +111,14 @@
   </div>
 </footer>
 
-<div class="modal-backdrop" id="cashbackModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-    <div class="modal-icon">₹</div>
-    <span class="kicker">CASHBACK ACTIVATION</span>
-    <h2 id="modalTitle">Activate cashback</h2>
-    <p class="modal-merchant" id="modalMerchant"></p>
-    <div class="reward-box"><span>Your estimated cashback</span><strong id="modalCashback"></strong><small><b id="modalRate"></b><br><span id="modalNote"></span></small></div>
-    <form id="cashbackForm">
-      <label for="cashbackSpend">How much are you planning to spend?</label>
-      <div class="money-input"><span>₹</span><input id="cashbackSpend" type="number" min="1" max="1000000" step="1" inputmode="numeric" value="2000" required></div>
-      <label for="cashbackEmail">Email for cashback tracking</label>
-      <input id="cashbackEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
-      <button class="btn btn-primary" id="activateCashbackBtn" type="submit">Activate cashback & shop</button>
-      <p class="microcopy">No password. Your email is used to attach this shopping trip to your cashback record and send essential cashback updates.</p>
-      <p id="cashbackStatus" class="form-status" aria-live="polite"></p>
-    </form>
-    <button class="text-button" id="continueWithoutCashback" type="button">Shop without SaveByAI cashback</button>
-    <a class="modal-claim" href="/claim.html">Already purchased? Claim missing cashback →</a>
-  </div>
-</div>
-
-<script src="/app.js" type="module"></script>
+<script>
+const b=document.querySelector('#homeMobileMenu');
+const n=document.querySelector('#homeMobileNav');
+b?.addEventListener('click',()=>{
+  const open=!n.hidden;
+  n.hidden=open;
+  b.setAttribute('aria-expanded',String(!open));
+});
+</script>
 </body>
 </html>
