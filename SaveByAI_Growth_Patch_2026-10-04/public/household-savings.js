@@ -44,12 +44,12 @@ function spendData(){
 }
 function makeOpportunities(spend,priority){
   const candidates=[
-    {key:'subscriptions',amount:spend.subscriptions,threshold:400,title:'Review recurring subscriptions',body:'Your recurring subscriptions are worth listing individually. We would first check unused services, overlapping plans, annual-vs-monthly pricing and bundles.',tag:'REDUCE / CANCEL'},
-    {key:'shopping',amount:spend.shopping,threshold:3000,title:'Check shopping routes before checkout',body:'For supported merchants, SaveByAI can already check cashback and verified offers. For other purchases, the cheapest route may still be a direct deal where we earn nothing.',tag:'STACK / CLAIM'},
-    {key:'fuel',amount:spend.fuel,threshold:3000,title:'Review how fuel and transport are paid',body:'Even when the fuel provider has no direct discount, card rewards, wallet routes or loyalty programmes may change the effective cost. Eligibility needs checking before we recommend anything.',tag:'ROUTE'},
-    {key:'mobile',amount:spend.mobile,threshold:1000,title:'Check mobile and broadband spend',body:'A high combined telecom bill may be worth reviewing for unused allowances, duplicate plans or a cheaper equivalent plan. This beta does not yet compare providers automatically.',tag:'REDUCE / SWITCH'},
-    {key:'groceries',amount:spend.groceries,threshold:8000,title:'Review recurring grocery payment rewards',body:'Large recurring grocery spend may justify checking store loyalty, payment rewards and gift-card routes where they are genuinely cheaper.',tag:'ROUTE / STACK'},
-    {key:'bills',amount:spend.bills,threshold:4000,title:'Review recurring bill payment routes',body:'Some bills cannot be discounted directly. The useful question is whether a payment route, rewards programme or plan change reduces the real annual cost.',tag:'ROUTE / REDUCE'}
+    {key:'subscriptions',amount:spend.subscriptions,threshold:400,title:'Subscriptions are worth checking first',body:'Recurring services are often one of the easiest areas to review. We would check unused or overlapping services, bundles and whether monthly vs annual billing changes the real cost.',tag:'EASY REVIEW'},
+    {key:'shopping',amount:spend.shopping,threshold:3000,title:'Check the route before your next purchase',body:'For shopping you already plan to do, savings may come from the merchant price, a valid coupon, payment offer or cashback. SaveByAI should recommend the cheapest legitimate route, even when we earn nothing.',tag:'CHECK BEFORE BUYING'},
+    {key:'fuel',amount:spend.fuel,threshold:3000,title:'Regular fuel spend may justify payment optimisation',body:'Fuel itself may have no direct discount. The useful check is whether your existing card, wallet or loyalty route changes the effective cost after fees and eligibility rules.',tag:'ROUTE'},
+    {key:'mobile',amount:spend.mobile,threshold:1000,title:'Your telecom spend may be worth a plan review',body:'We would check for unused allowances, duplicate connections, contract changes or a cheaper equivalent plan. We do not yet compare every provider automatically.',tag:'PLAN REVIEW'},
+    {key:'groceries',amount:spend.groceries,threshold:8000,title:'Recurring grocery spend may reward the right route',body:'For frequent grocery spending, we would check store loyalty, eligible card rewards and genuine gift-card savings without assuming they always stack.',tag:'RECURRING SPEND'},
+    {key:'bills',amount:spend.bills,threshold:4000,title:'Some bills can be optimised without a direct discount',body:'If the provider gives no cashback, the next questions are payment route, plan or tariff, avoidable fees and whether a cheaper equivalent service exists.',tag:'BILL REVIEW'}
   ];
   let chosen=candidates.filter(x=>x.amount>=x.threshold);
   if(priority && priority!=='not_sure'){
@@ -78,11 +78,16 @@ function renderResult(){
   currentResult={spend,total,opportunities,priority};
   document.querySelector('#totalSpend').textContent=money(total);
   document.querySelector('#opportunityCount').textContent=String(opportunities.length);
+  document.querySelector('#resultHeadline').textContent=`We found ${opportunities.length} area${opportunities.length===1?'':'s'} worth reviewing.`;
   document.querySelector('#opportunityList').innerHTML=opportunities.map((o,i)=>`
     <article class="audit-opportunity">
       <div class="audit-opportunity-no">${i+1}</div>
-      <div><span>${o.tag}</span><h3>${o.title}</h3><p>${o.body}</p></div>
+      <div><span>${i===0?'START HERE · ':''}${o.tag}</span><h3>${o.title}</h3><p>${o.body}</p></div>
     </article>`).join('');
+  const firstKey=opportunities[0]?.key;
+  const preferred=(priority&&priority!=='not_sure')?priority:firstKey;
+  const focus=document.querySelector(`input[name="reviewFocus"][value="${preferred}"]`);
+  if(focus)focus.checked=true;
   track('savings_check_completed',{
     household_size:document.querySelector('#householdSize').value,
     priority,
@@ -113,9 +118,10 @@ document.querySelector('#requestReviewBtn').addEventListener('click',async()=>{
   if(!consent){status.textContent='Please tick the consent box so we can send the beta review.';status.className='form-status error';return;}
   const checkId=(crypto.randomUUID?.()||Date.now().toString(36));
   const s=currentResult.spend;
+  const reviewFocus=document.querySelector('input[name="reviewFocus"]:checked')?.value||currentResult.priority||'not_sure';
   const compact=[
     'audit',`id=${checkId.slice(0,12)}`,`hh=${document.querySelector('#householdSize').value}`,
-    `city=${cleanText(document.querySelector('#city').value,25)}`,`p=${document.querySelector('#priorityArea').value}`,
+    `city=${cleanText(document.querySelector('#city').value,25)}`,`p=${document.querySelector('#priorityArea').value}`,`focus=${reviewFocus}`,
     `sh=${s.shopping}`,`fu=${s.fuel}`,`su=${s.subscriptions}`,`mb=${s.mobile}`,`gr=${s.groceries}`,`bi=${s.bills}`
   ].join('|').slice(0,235);
   status.textContent='Saving your request…';status.className='form-status';
@@ -125,7 +131,7 @@ document.querySelector('#requestReviewBtn').addEventListener('click',async()=>{
     if(!r.ok)throw new Error(data.error||'Could not save your request.');
     localStorage.setItem('savebyai_savings_review_email',email);
     localStorage.setItem('savebyai_last_savings_check',JSON.stringify({check_id:checkId,household_size:document.querySelector('#householdSize').value,city:cleanText(document.querySelector('#city').value),priority:currentResult.priority,spend:s,total:currentResult.total,created_at:new Date().toISOString()}));
-    await track('savings_review_requested',{check_id:checkId.slice(0,12),priority:currentResult.priority,total_monthly_spend:currentResult.total});
+    await track('savings_review_requested',{check_id:checkId.slice(0,12),priority:currentResult.priority,review_focus:reviewFocus,total_monthly_spend:currentResult.total});
     status.textContent='Request received. We are reviewing early beta submissions manually and will use your email for this savings review.';
     status.className='form-status success';
     document.querySelector('#requestReviewBtn').disabled=true;

@@ -33,7 +33,8 @@
     <div>
       <div class="eyebrow"><span class="pulse"></span> HOUSEHOLD SAVINGS BETA</div>
       <h1>Find where your household may be <span>overspending.</span></h1>
-      <p class="lead">Give us rough monthly numbers. SaveByAI will highlight areas worth reviewing — without pretending every expense has a guaranteed discount.</p>
+      <p class="lead">Give us rough monthly numbers. SaveByAI will highlight practical areas worth reviewing — without pretending every expense has a guaranteed discount.</p>
+      <div class="beta-note"><b>Early beta:</b> your first result is a quick check. Personalised reviews are prepared individually for early users.</div>
       <div class="audit-trust-row">
         <span>✓ About 2 minutes</span>
         <span>✓ No bank login</span>
@@ -129,30 +130,44 @@
 
       <section class="audit-step" data-step="3" hidden>
         <span class="kicker">STEP 3 OF 3</span>
-        <h2>Your first SaveByAI check.</h2>
-        <p class="audit-intro">This is a triage result, not a promise of guaranteed savings.</p>
+        <h2>Your Household Savings Check.</h2>
+        <p class="audit-intro">This is a first-pass review, not a promise of guaranteed savings. We focus on areas where a practical next step may exist.</p>
 
         <div class="audit-summary">
           <div><span>Monthly spend entered</span><strong id="totalSpend">₹0</strong></div>
           <div><span>Areas worth reviewing</span><strong id="opportunityCount">0</strong></div>
         </div>
 
+        <div class="result-heading"><span>YOUR REVIEW</span><h3 id="resultHeadline">We found areas worth reviewing.</h3><p>Start with the first item below. The order reflects your spending and the area you told us matters most.</p></div>
         <div id="opportunityList" class="audit-opportunity-list"></div>
+
+        <div class="review-focus-box">
+          <span class="kicker">YOUR PRIORITY</span>
+          <h3>Which area would you like SaveByAI to review first?</h3>
+          <div class="focus-options" id="reviewFocusOptions">
+            <label><input type="radio" name="reviewFocus" value="subscriptions"><span>📺 Subscriptions</span></label>
+            <label><input type="radio" name="reviewFocus" value="shopping"><span>🛒 Shopping</span></label>
+            <label><input type="radio" name="reviewFocus" value="fuel"><span>⛽ Fuel / transport</span></label>
+            <label><input type="radio" name="reviewFocus" value="mobile"><span>📱 Mobile / broadband</span></label>
+            <label><input type="radio" name="reviewFocus" value="groceries"><span>🛍️ Groceries</span></label>
+            <label><input type="radio" name="reviewFocus" value="bills"><span>🏠 Other bills</span></label>
+          </div>
+        </div>
 
         <div class="audit-review-box">
           <div>
-            <span class="kicker">EARLY BETA</span>
-            <h3>Want a personalised review?</h3>
-            <p>For early users, we are manually reviewing submissions to learn what is actually useful before automating recommendations.</p>
+            <span class="kicker">PERSONALISED BETA REVIEW</span>
+            <h3>Want us to take a closer look?</h3>
+            <p>Early beta reviews are prepared individually, so you receive a practical recommendation rather than a generic savings score.</p>
           </div>
           <label>Email
             <input id="reviewEmail" type="email" autocomplete="email" placeholder="you@example.com">
           </label>
           <label class="consent dark-consent">
             <input id="reviewConsent" type="checkbox">
-            <span>I agree to receive my SaveByAI beta savings review and essential follow-up about this test.</span>
+            <span>I agree to receive my SaveByAI savings review and essential follow-up about this request.</span>
           </label>
-          <button id="requestReviewBtn" class="btn btn-primary" type="button">Request my free beta review</button>
+          <button id="requestReviewBtn" class="btn btn-primary" type="button">Request my free savings review</button>
           <p id="reviewStatus" class="form-status" aria-live="polite"></p>
         </div>
 
@@ -165,9 +180,9 @@
 
     <aside class="audit-side">
       <div class="audit-side-card">
-        <span class="kicker">WHAT THIS TESTS</span>
-        <h3>Can SaveByAI understand enough to be useful?</h3>
-        <p>We are deliberately starting small. Your feedback determines which category we build next.</p>
+        <span class="kicker">WHY SAVEBYAI?</span>
+        <h3>Practical savings, not exaggerated claims.</h3>
+        <p>SaveByAI looks at everyday spending and highlights areas worth reviewing for realistic savings opportunities.</p>
       </div>
       <div class="audit-side-card">
         <span class="kicker">WHAT WE DO NOT ASK FOR</span>

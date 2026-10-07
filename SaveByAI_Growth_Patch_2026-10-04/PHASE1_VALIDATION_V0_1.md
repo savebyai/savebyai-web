@@ -100,3 +100,15 @@ Use only in communities where self-promotion/research posts are permitted, or af
 ## Product rule
 
 **Recommend what saves the customer the most, even when SaveByAI earns nothing.**
+
+
+## v0.2 UX corrections (2026-10-07)
+- Replaced founder-language “What this tests” with customer-facing “Why SaveByAI?”
+- Removed public copy about users deciding what we build next.
+- Strengthened Step 3 with a clear “areas worth reviewing” hierarchy.
+- Added “Which area should we review first?” after the result.
+- Added review-focus to the compact lead payload and funnel event.
+- Reframed manual review as an individually prepared customer benefit.
+- Collapsed the large shopping grid on the homepage; it remains available on demand.
+- Added `/how-it-works.html` so shared/direct links do not dead-end.
+- No social-proof number is shown until real users exist.
