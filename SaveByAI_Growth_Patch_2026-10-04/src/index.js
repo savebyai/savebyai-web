@@ -1,7 +1,8 @@
 import { AFFILIATE_MERCHANTS } from './merchant-config.mjs';
 const ALLOWED_EVENTS=new Set([
   'page_loaded','search_submitted','search_chip','merchant_viewed','calculator_used','guide_clicked','lead_submitted',
-  'affiliate_click','cashback_modal_opened','cashback_started','cashback_claim_submitted'
+  'affiliate_click','cashback_modal_opened','cashback_started','cashback_claim_submitted',
+  'savings_check_started','savings_check_completed','savings_review_requested'
 ]);
 
 // Cashback is enabled only where the programme explicitly permits cashback traffic.

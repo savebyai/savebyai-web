@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Household Savings Check — SaveByAI</title>
+  <meta name="description" content="A free 2-minute household savings check for India. See which areas of your everyday spending may be worth reviewing.">
+  <link rel="canonical" href="https://savebyai.in/household-savings.html">
+  <meta property="og:title" content="Find where your household may be overspending — SaveByAI">
+  <meta property="og:description" content="Takes about 2 minutes. No bank login or card numbers.">
+  <meta property="og:url" content="https://savebyai.in/household-savings.html">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar shell">
+  <a class="brand" href="/" aria-label="SaveByAI home">SaveByAI<span>.</span></a>
+  <nav aria-label="Main navigation">
+    <a class="active-link" href="/household-savings.html">Savings Check</a>
+    <a href="/#stores">Shopping</a>
+    <a href="/my.html">My SaveByAI</a>
+  </nav>
+  <button class="mobile-menu" id="mobileMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+</header>
+<div class="mobile-nav" id="mobileNav" hidden>
+  <a href="/household-savings.html">Savings Check</a>
+  <a href="/#stores">Shopping</a>
+  <a href="/my.html">My SaveByAI</a>
+</div>
+
+<main class="audit-main">
+  <section class="audit-hero shell">
+    <div>
+      <div class="eyebrow"><span class="pulse"></span> HOUSEHOLD SAVINGS BETA</div>
+      <h1>Find where your household may be <span>overspending.</span></h1>
+      <p class="lead">Give us rough monthly numbers. SaveByAI will highlight areas worth reviewing — without pretending every expense has a guaranteed discount.</p>
+      <div class="audit-trust-row">
+        <span>✓ About 2 minutes</span>
+        <span>✓ No bank login</span>
+        <span>✓ No card numbers</span>
+      </div>
+    </div>
+    <aside class="audit-principle">
+      <span>OUR RULE</span>
+      <strong>We recommend what saves you the most — even when SaveByAI earns nothing.</strong>
+      <p>This beta is designed to learn which household expenses people actually want help with before we automate more categories.</p>
+    </aside>
+  </section>
+
+  <section class="audit-shell shell">
+    <form id="savingsCheckForm" class="audit-card">
+      <div class="audit-progress">
+        <span class="current" data-step-dot="1">1</span><i></i>
+        <span data-step-dot="2">2</span><i></i>
+        <span data-step-dot="3">3</span>
+      </div>
+
+      <section class="audit-step" data-step="1">
+        <span class="kicker">STEP 1 OF 3</span>
+        <h2>Tell us about your household.</h2>
+        <p class="audit-intro">Only broad information. We do not need income documents, bank access or account numbers.</p>
+
+        <div class="audit-grid two">
+          <label>People in your household
+            <select id="householdSize" required>
+              <option value="">Choose</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6+">6+</option>
+            </select>
+          </label>
+          <label>City <small>(optional)</small>
+            <input id="city" type="text" maxlength="50" placeholder="e.g. Pune">
+          </label>
+        </div>
+
+        <label class="full-label">Which area would you most like help reducing?
+          <select id="priorityArea">
+            <option value="not_sure">Not sure — show me</option>
+            <option value="shopping">Shopping</option>
+            <option value="subscriptions">Subscriptions</option>
+            <option value="fuel">Fuel / transport</option>
+            <option value="mobile">Mobile / broadband</option>
+            <option value="groceries">Groceries</option>
+            <option value="bills">Other household bills</option>
+          </select>
+        </label>
+
+        <div class="audit-actions">
+          <span></span>
+          <button class="btn btn-primary" type="button" data-next="2">Next: monthly spending →</button>
+        </div>
+      </section>
+
+      <section class="audit-step" data-step="2" hidden>
+        <span class="kicker">STEP 2 OF 3</span>
+        <h2>Roughly what do you spend each month?</h2>
+        <p class="audit-intro">Estimates are fine. Enter ₹0 if a category does not apply.</p>
+
+        <div class="audit-spend-grid">
+          <label><span>🛒</span><b>Online / discretionary shopping</b><small>Clothes, electronics, home, beauty</small>
+            <div class="audit-money"><i>₹</i><input id="spendShopping" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+          <label><span>⛽</span><b>Fuel / transport</b><small>Fuel, cabs and local transport</small>
+            <div class="audit-money"><i>₹</i><input id="spendFuel" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+          <label><span>📺</span><b>Subscriptions</b><small>Streaming, apps, memberships</small>
+            <div class="audit-money"><i>₹</i><input id="spendSubscriptions" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+          <label><span>📱</span><b>Mobile / broadband</b><small>All household plans combined</small>
+            <div class="audit-money"><i>₹</i><input id="spendMobile" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+          <label><span>🛍️</span><b>Groceries</b><small>Supermarket and recurring household food</small>
+            <div class="audit-money"><i>₹</i><input id="spendGroceries" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+          <label><span>🏠</span><b>Other bills</b><small>Utilities and recurring household bills</small>
+            <div class="audit-money"><i>₹</i><input id="spendBills" type="number" min="0" max="1000000" step="100" inputmode="numeric" value="0"></div>
+          </label>
+        </div>
+
+        <div class="audit-actions">
+          <button class="btn audit-back" type="button" data-back="1">← Back</button>
+          <button class="btn btn-primary" type="button" data-next="3">See areas to review →</button>
+        </div>
+      </section>
+
+      <section class="audit-step" data-step="3" hidden>
+        <span class="kicker">STEP 3 OF 3</span>
+        <h2>Your first SaveByAI check.</h2>
+        <p class="audit-intro">This is a triage result, not a promise of guaranteed savings.</p>
+
+        <div class="audit-summary">
+          <div><span>Monthly spend entered</span><strong id="totalSpend">₹0</strong></div>
+          <div><span>Areas worth reviewing</span><strong id="opportunityCount">0</strong></div>
+        </div>
+
+        <div id="opportunityList" class="audit-opportunity-list"></div>
+
+        <div class="audit-review-box">
+          <div>
+            <span class="kicker">EARLY BETA</span>
+            <h3>Want a personalised review?</h3>
+            <p>For early users, we are manually reviewing submissions to learn what is actually useful before automating recommendations.</p>
+          </div>
+          <label>Email
+            <input id="reviewEmail" type="email" autocomplete="email" placeholder="you@example.com">
+          </label>
+          <label class="consent dark-consent">
+            <input id="reviewConsent" type="checkbox">
+            <span>I agree to receive my SaveByAI beta savings review and essential follow-up about this test.</span>
+          </label>
+          <button id="requestReviewBtn" class="btn btn-primary" type="button">Request my free beta review</button>
+          <p id="reviewStatus" class="form-status" aria-live="polite"></p>
+        </div>
+
+        <div class="audit-actions final-actions">
+          <button class="btn audit-back" type="button" data-back="2">← Change numbers</button>
+          <a class="btn audit-shop" href="/#stores">Check shopping cashback</a>
+        </div>
+      </section>
+    </form>
+
+    <aside class="audit-side">
+      <div class="audit-side-card">
+        <span class="kicker">WHAT THIS TESTS</span>
+        <h3>Can SaveByAI understand enough to be useful?</h3>
+        <p>We are deliberately starting small. Your feedback determines which category we build next.</p>
+      </div>
+      <div class="audit-side-card">
+        <span class="kicker">WHAT WE DO NOT ASK FOR</span>
+        <ul>
+          <li>Bank login</li>
+          <li>Card numbers</li>
+          <li>Income documents</li>
+          <li>Insurance policy uploads</li>
+        </ul>
+      </div>
+      <div class="audit-side-card soft">
+        <span class="kicker">SHOPPING ALREADY LIVE</span>
+        <p>SaveByAI cashback remains available at supported merchants. It is now one savings mechanism, not the whole product.</p>
+        <a href="/#stores">See shopping savings →</a>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="shell">
+  <div><a class="brand small" href="/">SaveByAI<span>.</span></a><p>Check every rupee for a better option.</p></div>
+  <div class="footer-links">
+    <a href="/household-savings.html">Savings Check</a>
+    <a href="/stores/">Shopping</a>
+    <a href="/affiliate-disclosure.html">Affiliate disclosure</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+<script src="/household-savings.js" type="module"></script>
+</body>
+</html>

@@ -45,3 +45,86 @@ footer{padding-top:30px;padding-bottom:48px;border-top:1px solid var(--line);dis
 
 /* v5.3 verified-offers layer */
 .verified-offers-panel{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 24px}.verified-offer-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:14px}.verified-offer-head h2{font-size:25px;margin:5px 0 0}.verified-offer-head>small{font-size:10px;color:var(--muted);white-space:nowrap}.compact-offer-list{display:grid;gap:8px}.compact-offer{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start;background:#f8fbfc;border:1px solid #e3edf1;border-radius:13px;padding:12px 13px}.compact-offer>span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);font-weight:950;padding-top:2px}.compact-offer div{display:flex;flex-direction:column;gap:3px}.compact-offer strong{font-size:13px;color:var(--navy);line-height:1.4}.compact-offer small{font-size:10px;color:var(--muted);line-height:1.5}.offer-source-row{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}.offer-source-row a{color:var(--teal);font-weight:900}.offer-load-note{font-size:11px;color:var(--muted);margin:0}.more-terms{margin-top:10px}@media(max-width:720px){.verified-offer-head{align-items:flex-start;flex-direction:column;gap:6px}.compact-offer{grid-template-columns:1fr;gap:4px}.offer-source-row{align-items:flex-start;flex-direction:column;gap:6px}}
+
+
+/* Phase 1 validation — Household Savings Check */
+.active-link{color:var(--teal)!important}
+.hero-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:30px}
+.hero-main-cta{padding:16px 20px;font-size:14px}
+.hero-secondary-cta{font-size:13px;font-weight:900;color:var(--teal)}
+.home-shopping-search{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);max-width:720px}
+.home-shopping-search>small{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-bottom:9px}
+.compact-search{margin-top:0;box-shadow:none}
+.audit-main{padding-bottom:40px}
+.audit-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:42px;align-items:center;padding-top:64px;padding-bottom:42px}
+.audit-hero h1{font-size:58px}
+.audit-trust-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;font-size:12px;font-weight:800;color:#607a90}
+.audit-principle{background:linear-gradient(155deg,var(--navy),#124e6c);color:#fff;border-radius:26px;padding:28px;box-shadow:var(--shadow)}
+.audit-principle>span{font-size:10px;letter-spacing:.13em;color:#88dfd4;font-weight:950}
+.audit-principle strong{display:block;font-size:24px;line-height:1.3;margin:12px 0;color:#fff}
+.audit-principle p{font-size:12px;line-height:1.65;color:#c2d4df;margin:0}
+.audit-shell{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:20px;align-items:start;margin-bottom:80px}
+.audit-card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 16px 50px rgba(9,39,64,.06)}
+.audit-progress{display:flex;align-items:center;margin-bottom:32px}
+.audit-progress span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#edf2f5;color:#71879a;font-weight:950;font-size:12px}
+.audit-progress span.current{background:var(--navy);color:#fff}
+.audit-progress span.done{background:var(--teal);color:#fff}
+.audit-progress i{height:2px;flex:1;background:#e3eaee;margin:0 8px}
+.audit-step h2{font-size:32px}
+.audit-intro{color:var(--muted);line-height:1.6;font-size:13px;margin:10px 0 24px}
+.audit-grid{display:grid;gap:14px}.audit-grid.two{grid-template-columns:1fr 1fr}
+.audit-card label,.audit-review-box label{font-size:12px;color:#526d83;font-weight:800}
+.audit-card label small{font-weight:600;color:#8ba0b1}
+.audit-card input,.audit-card select,.audit-review-box input{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);padding:13px 14px;border-radius:12px;outline:none;margin-top:7px}
+.audit-card input:focus,.audit-card select:focus,.audit-review-box input:focus{border-color:#8dcfc7;box-shadow:0 0 0 3px rgba(10,133,120,.08)}
+.full-label{display:block;margin-top:14px}
+.audit-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.audit-back{background:#fff;border:1px solid var(--line);color:#557089}
+.audit-shop{background:#edf6f4;color:var(--teal)}
+.audit-spend-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.audit-spend-grid>label{display:block;background:#f9fbfc;border:1px solid #e1eaef;border-radius:16px;padding:15px}
+.audit-spend-grid>label>span{font-size:22px;display:block;margin-bottom:9px}
+.audit-spend-grid>label>b{display:block;color:var(--navy);font-size:13px}
+.audit-spend-grid>label>small{display:block;color:var(--muted);font-size:10px;line-height:1.5;margin-top:3px;min-height:30px}
+.audit-money{display:flex;align-items:center;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.audit-money i{font-style:normal;font-weight:900;color:var(--navy);padding-left:12px}
+.audit-money input{border:0!important;box-shadow:none!important;margin:0!important;padding-left:8px!important}
+.audit-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.audit-summary>div{background:var(--mint);border:1px solid #d6eee9;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:5px}
+.audit-summary span{font-size:10px;color:var(--muted);font-weight:800}
+.audit-summary strong{font-size:24px;color:var(--navy)}
+.audit-opportunity-list{display:grid;gap:10px}
+.audit-opportunity{display:grid;grid-template-columns:38px 1fr;gap:12px;border:1px solid var(--line);border-radius:16px;padding:15px}
+.audit-opportunity-no{width:34px;height:34px;border-radius:11px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:950}
+.audit-opportunity span{font-size:9px;letter-spacing:.1em;color:var(--teal);font-weight:950}
+.audit-opportunity h3{font-size:16px;margin:4px 0 5px}
+.audit-opportunity p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}
+.audit-review-box{margin-top:22px;padding:22px;background:linear-gradient(150deg,#0b2942,#154f70);color:#fff;border-radius:20px}
+.audit-review-box h3{color:#fff;font-size:22px}
+.audit-review-box p{color:#c2d4df;font-size:11px;line-height:1.6}
+.audit-review-box label{display:block;color:#d4e2e9;margin-top:12px}
+.audit-review-box .dark-consent{display:flex;gap:8px;align-items:flex-start;font-size:10px;line-height:1.5}
+.audit-review-box .dark-consent input{width:auto;margin-top:3px}
+.audit-review-box .btn{margin-top:12px;width:100%}
+.audit-review-box .form-status.success{color:#8ff0df}
+.audit-review-box .form-status.error{color:#ffd2d2}
+.audit-side{display:grid;gap:12px}
+.audit-side-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:19px}
+.audit-side-card h3{font-size:17px;line-height:1.35}
+.audit-side-card p,.audit-side-card li{font-size:11px;line-height:1.65;color:var(--muted)}
+.audit-side-card ul{padding-left:18px;margin:10px 0 0}
+.audit-side-card.soft{background:var(--mint);border-color:#d6eee9}
+.audit-side-card.soft a{display:inline-block;margin-top:8px;color:var(--teal);font-size:11px;font-weight:900}
+@media(max-width:900px){
+  .audit-hero,.audit-shell{grid-template-columns:1fr}
+  .audit-side{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:720px){
+  .audit-hero{padding-top:36px}.audit-hero h1{font-size:43px;letter-spacing:-2px}
+  .audit-card{padding:20px}.audit-grid.two,.audit-spend-grid,.audit-summary{grid-template-columns:1fr}
+  .audit-side{grid-template-columns:1fr}
+  .audit-actions{align-items:stretch;flex-direction:column-reverse}
+  .audit-actions .btn,.audit-actions a{width:100%}
+  .hero-cta-row{align-items:stretch;flex-direction:column}
+  .hero-main-cta,.hero-secondary-cta{width:100%;text-align:center}
+}
